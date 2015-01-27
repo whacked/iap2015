@@ -11,3 +11,18 @@
 ;; sampled-piano samples are not cached, overtime will attempt to
 ;; download them and cache them now. once you see the prompt update with
 ;; the Overtone logo, you are good to go.
+
+
+;; use odoc() to lookup function documentation in overtone outside of
+;; this you should probably use doc() for the same purpose
+
+;; get documentation for prn
+(odoc prn)
+
+;; get documentation for synth/ping
+(odoc synth/ping)
+
+;; get documentation for odoc
+(odoc odoc)
+
+
