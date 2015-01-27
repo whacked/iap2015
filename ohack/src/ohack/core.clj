@@ -201,7 +201,12 @@
                  ;; we need to send a fresh buffer if:
                  ;; it is full, OR
                  ;; the incoming value is not a consecutive index
-                 ;; relative to the last value in the buffer
-                 buf
+                 ;; relative to the last value in the buffer, OR
+                 ;; the buffer is empty (i.e. first iteration,
+                 ;; thus last-val is nil)
+                 (if (or (nil? last-val) ;; also short-circuits the subtraction
+                         buf-full?
+                         (not= 1 (- cur-val last-val)))
+                   )
                  (conj rtn (first input)))))))
   )
