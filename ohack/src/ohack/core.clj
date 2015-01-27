@@ -57,3 +57,54 @@
 
   (stop)
   )
+
+;; now let's play a little melody
+(let [beat-ms 250
+      base-line [:D3 :A2 :A#2 :C3
+                 :D3 :F3 :G3 :C4
+                 :D4 :A3 :F3 :C3
+                 :D3 :F2 :G2 :A#2]
+      num-measures (* 1 (count base-line))
+      ]
+  (stop)
+  (letfn [(play-it
+            ;; first, define a recursive note player
+            ([interval instrument values]
+             (play-it (now) interval instrument values 0))
+            ([time interval instrument values counter]
+             ;; the counter is only used for this hack:
+             ;; because vintage bass "plays" forever...
+             ;; close the instrument's play envelope.
+             ;; you can try commenting this out and hear
+             ;; what happens.
+             (when (= (mod counter 4) 0)
+               (ctl instrument :gate 0))
+             (if-not (empty? values)
+               (let [value (first values)
+                     next-time (+ time interval)]
+                 (when value
+                   ;; at() is basically overtone's scheduler
+                   (at time (instrument value)))
+                 ;; after the note plays, schedule another call at the
+                 ;; later time
+                 (apply-at next-time
+                           play-it [next-time interval instrument (rest values) (inc counter)])))))]
+
+    ;; baseline plays once per 4 notes
+    (play-it (* 4 beat-ms)
+             synth/vintage-bass
+             ;; cycle the base line forever (but in reality, just for
+             ;; `num-measures` times)
+             (take num-measures (cycle (map note base-line))))
+
+    (play-it beat-ms
+             piano
+             ;; concat the sets-of-4-note-chords into a single
+             ;; seq of notes to send to play-it
+             (apply concat
+                    (take num-measures
+                          ;; for each root note, use overtone's rand-chord
+                          ;; to construct a 4-note chord that spans up to
+                          ;; 24 degrees
+                          (map (fn [root-note] (rand-chord root-note :major 4 24))
+                               (cycle base-line)))))))
