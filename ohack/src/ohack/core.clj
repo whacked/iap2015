@@ -186,6 +186,9 @@
   ;; blocks of 6 lines must occur with consecutive line
   ;; indexes, so lets detect that.
 
+
+
+  ;; we should move this to a separate function...
   (loop [input (sort (map first index-line-list))
          ;; use a buffer to store incoming consecutive indexes
          buf []
