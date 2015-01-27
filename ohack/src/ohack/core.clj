@@ -207,6 +207,8 @@
                   next-rtn))))))
   )
 
+;; we want a function that takes a regex and returns the position of the match...
+
 ;; copy a line from the prn output and add in a hammer for good measure:
 (let [line "B|----1-----2----0----3----|--1---0---3------|--1---0---3---0h1-|--1---3------|"]
   line)
