@@ -194,7 +194,7 @@
     (let [buf-full? (= 6 (count buf))
           next-rtn (if buf-full? (conj rtn buf) rtn)]
       (if (empty? input)
-        rtn
+        next-rtn
         (let [last-val (last buf)
               cur-val (first input)]
           (recur (rest input)
@@ -208,7 +208,7 @@
                          buf-full?
                          (not= 1 (- cur-val last-val)))
                    [cur-val] ;; fresh buffer
-                   (conj buf cur-val) ;; add to buffer
-                   )
-                 (conj rtn (first input)))))))
+                   (conj buf cur-val)) ;; add to buffer
+                 next-rtn)))))
+
   )
