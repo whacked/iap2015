@@ -195,7 +195,8 @@
           next-rtn (if buf-full? (conj rtn buf) rtn)]
       (if (empty? input)
         rtn
-        (let []
+        (let [last-val (last buf)
+              cur-val (first input)]
           (recur (rest input)
                  ;; we need to send a fresh buffer if:
                  ;; it is full, OR
