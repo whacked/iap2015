@@ -182,4 +182,16 @@
 
       ]
   ;; now we have all the indices of lines we care about
-  (map first index-line-list))
+  ;; and we need to group them into blocks of 6 lines.
+  ;; blocks of 6 lines must occur with consecutive line
+  ;; indexes, so lets detect that.
+
+  ;; set up our recursion skeleton.
+  ;; it returns a copy of the original list
+  (loop [input (map first index-line-list)
+         rtn []]
+    (if (empty? input)
+      rtn
+      (recur (rest input)
+             (conj rtn (first input)))))
+  )
