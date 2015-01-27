@@ -197,6 +197,10 @@
         rtn
         (let []
           (recur (rest input)
+                 ;; we need to send a fresh buffer if:
+                 ;; it is full, OR
+                 ;; the incoming value is not a consecutive index
+                 ;; relative to the last value in the buffer
                  buf
                  (conj rtn (first input)))))))
   )
