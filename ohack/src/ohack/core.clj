@@ -207,6 +207,8 @@
                  (if (or (nil? last-val) ;; also short-circuits the subtraction
                          buf-full?
                          (not= 1 (- cur-val last-val)))
+                   [cur-val] ;; fresh buffer
+                   (conj buf cur-val) ;; add to buffer
                    )
                  (conj rtn (first input)))))))
   )
