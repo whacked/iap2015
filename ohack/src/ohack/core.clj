@@ -190,9 +190,13 @@
          ;; use a buffer to store incoming consecutive indexes
          buf []
          rtn []]
-    (if (empty? input)
-      rtn
-      (recur (rest input)
-             buf
-             (conj rtn (first input)))))
+    ;; we need to add buf to rtn if buf has 6 elements
+    (let [buf-full? (= 6 (count buf))
+          next-rtn (if buf-full? (conj rtn buf) rtn)]
+      (if (empty? input)
+        rtn
+        (let []
+          (recur (rest input)
+                 buf
+                 (conj rtn (first input)))))))
   )
