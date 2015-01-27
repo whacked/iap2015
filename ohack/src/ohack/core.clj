@@ -216,7 +216,16 @@
                        (fn [[_ s]] (.contains s "-"))
                        (into {} (map-indexed vector (s/split-lines guitar-tab))))
 
+      ;; collect-into-consecutive will return
+      ;; a seq containing sets of 6 consecutive indexes [i_{n+0} ... i_{n+5}]
+      ;; which we assume map to sets of 6 lines within the tab file.
+      ;; in other words we are ignoring all the intervening lines, be them
+      ;; comments or dynamics or major chord labels or whatnot
+      ;; NOTE keys() here acts the same as (map first index-line-list)
+      ;; since index-line-list is not a hash-map
+      index-group-list (collect-into-consecutive (keys index-line-list))
+
       ]
-  (collect-into-consecutive (map first index-line-list))
+  index-group-list
 
   )
