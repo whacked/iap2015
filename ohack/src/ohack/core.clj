@@ -108,3 +108,9 @@
                           ;; 24 degrees
                           (map (fn [root-note] (rand-chord root-note :major 4 24))
                                (cycle base-line)))))))
+
+
+
+;; ok, let's get back to more basics and build up to other exciting things.
+;; first, let's add a few imports.
+
