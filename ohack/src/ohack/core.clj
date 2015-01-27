@@ -219,7 +219,9 @@
 
 ;; copy a line from the prn output and add in a hammer for good measure:
 (let [line "B|----1-----2----0----3----|--1---0---3------|--1---0---3---0h1-|--1---3------|"]
-  line)
+  ;; filter out everything before the actual guitar line "- ..." part
+  ;; note: drop-while predicate needs a char (\-), not a string ("-")!
+  (drop-while #(not= % \-) line))
 
 ;; first, filter out all lines that don't look like guitar lines
 ;; use map-index because we need to keep ordering information
