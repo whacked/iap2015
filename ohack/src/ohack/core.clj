@@ -150,4 +150,4 @@
 ;; suppose now we want to play a multiple notes together so every
 ;; sequence within the input sequence contains pairs of numbers of
 ;; string-index fret-value, e.g.
-(playguitar320 [[0 3, 3 0, 4 0, 5 3]])
+(playguitar320 [[0 3, 3 0, 4 0, 5 3]]) ;; only plays the first pair!
