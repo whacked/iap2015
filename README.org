@@ -95,7 +95,5 @@
   lein new ohack
   #+END_SRC
 
-  within =ohack=, update the dependencies in =project.clj=, open
-  =src/ohack/core.clj=, and run =M-x cider-jack-in=
-
-  see [[file:ohack/src/ohack/core.clj]]
+  within =ohack=, update the dependencies in [[file:ohack/project.clj=]],
+  and open [[file:ohack/src/ohack/core.clj]]
