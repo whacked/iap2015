@@ -157,3 +157,7 @@
 
 ;; now we can play multiple notes at the same time
 (playguitar320 [[0 3, 3 0, 4 0, 5 3]])
+
+;; we're going to fetch the tab from
+;; http://tabs.ultimate-guitar.com/t/tracy_chapman/fast_car_ver8_tab.htm
+(def fast-car-html (slurp "http://tabs.ultimate-guitar.com/t/tracy_chapman/fast_car_ver8_tab.htm"))
