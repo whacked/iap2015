@@ -186,12 +186,13 @@
   ;; blocks of 6 lines must occur with consecutive line
   ;; indexes, so lets detect that.
 
-  ;; set up our recursion skeleton.
-  ;; it returns a copy of the original list
   (loop [input (map first index-line-list)
+         ;; use a buffer to store incoming consecutive indexes
+         buf []
          rtn []]
     (if (empty? input)
       rtn
       (recur (rest input)
+             buf
              (conj rtn (first input)))))
   )
