@@ -116,3 +116,8 @@
 ;; ok, let's get back to more basics and build up to other exciting things.
 ;; first, let's add a few imports.
 
+;; playing with the guitar synth
+
+;; Mark found this guitar-pick function
+(guitar-pick (guitar) 0 0) ;; String 0 (Low E) Fret 0 (open)
+
