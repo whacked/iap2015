@@ -163,3 +163,10 @@
 (def fast-car-html (slurp "http://tabs.ultimate-guitar.com/t/tracy_chapman/fast_car_ver8_tab.htm"))
 ;; verify we grabbed some html?
 (print (.substring fast-car-html 2000 3000))
+;; we're just going to extract the tab section by visual inspection...
+(print
+ (-> fast-car-html
+     (.split "Tabbed by")
+     second
+     (.split "hammer-on")
+     first))
