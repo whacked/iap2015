@@ -212,5 +212,8 @@
                  next-rtn)))))
 
   ;; why doesn't it work???
+  ;; what does `input` look like?
+  (map first index-line-list)
+  ;; it's out of order!!!
 
   )
