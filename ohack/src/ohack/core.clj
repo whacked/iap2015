@@ -168,3 +168,13 @@
       second
       (.split "hammer-on")
       first))
+
+;; let's iteratively write a simple parser for this
+
+;; first, filter out all lines that don't look like guitar lines
+;; use map-index because we need to keep ordering information
+(let [guitar-tab fast-car-tab]
+  (filter
+   ;; a tab line must contain "-"
+   (fn [[_ s]] (.contains s "-"))
+   (into {} (map-indexed vector (s/split-lines guitar-tab)))))
