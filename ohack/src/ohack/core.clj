@@ -215,6 +215,7 @@
                        ;; a tab line must contain "-"
                        (fn [[_ s]] (.contains s "-"))
                        (into {} (map-indexed vector (s/split-lines guitar-tab))))
+      index-to-line (into {} index-line-list)
 
       ;; collect-into-consecutive will return
       ;; a seq containing sets of 6 consecutive indexes [i_{n+0} ... i_{n+5}]
