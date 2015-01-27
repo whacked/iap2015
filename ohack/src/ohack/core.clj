@@ -240,4 +240,8 @@
 
       ]
 
+  ;; map over each 6-line-set...
+  (doseq [line-set sorted-grouped-line-set-list]
+    (prn line-set))
+
   )
