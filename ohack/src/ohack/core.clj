@@ -121,3 +121,13 @@
 ;; Mark found this guitar-pick function
 (guitar-pick (guitar) 0 0) ;; String 0 (Low E) Fret 0 (open)
 
+;; then made this function to play a sequence of notes
+(defn guitar-pick-note-sequence
+  "play a sequence of notes [string fret] on instrument instrument
+  spaced by interval milliseconds"
+  [interval noteseq]
+  (let [playguitar (partial guitar-pick (guitar))
+        timeseq (range (now) (+ (now) (* interval (count noteseq))) interval)]
+    (doseq [[[string fret] timeval] (map vector noteseq timeseq)]
+      (playguitar string fret timeval))))
+
