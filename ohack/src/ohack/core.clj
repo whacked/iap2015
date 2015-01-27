@@ -226,18 +226,18 @@
       ;; since index-line-list is not a hash-map
       index-group-list (collect-into-consecutive (keys index-line-list))
 
-      ]
+      ;; from the 6-line groups, get lines from the original index-line maps
+      ;; and sorted by increasing line indexes.
+      ;; how this works:
+      ;; 1. each set of 6 indexes gets passed to the lambda function
+      ;; 2. using index-to-line, select the 6 matching lines as a hash-map
+      ;; 3. sort by keys to ensure increasing line index order
+      ;; 4. get the vals, i.e., the lines in correct order
+      ;; now, we have a seq containing sets of 6 lines
+      sorted-grouped-line-set-list (map #(vals (sort (select-keys index-to-line %)))
+                                        ;; these will be grouped into sets of 6 lines, with indexes
+                                        (sort index-group-list))
 
-  ;; from the 6-line groups, get lines from the original index-line maps
-  ;; and sorted by increasing line indexes.
-  ;; how this works:
-  ;; 1. each set of 6 indexes gets passed to the lambda function
-  ;; 2. using index-to-line, select the 6 matching lines as a hash-map
-  ;; 3. sort by keys to ensure increasing line index order
-  ;; 4. get the vals, i.e., the lines in correct order
-  ;; now, we have a seq containing sets of 6 lines
-  (map #(vals (sort (select-keys index-to-line %)))
-       ;; these will be grouped into sets of 6 lines, with indexes
-       (sort index-group-list))
+      ]
 
   )
