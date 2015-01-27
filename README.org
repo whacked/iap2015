@@ -86,3 +86,11 @@
     launch emacs; if all goes well, you should have a working
     =emacs-live= install with =elscreen= and =git-timemachine=. OK, on
     to overtone.
+
+* starting our overtone project
+
+  Presumably you have =clojure= and =leiningen= working already...
+
+  #+BEGIN_SRC sh :eval never
+  lein new ohack
+  #+END_SRC
