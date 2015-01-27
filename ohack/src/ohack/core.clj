@@ -1,8 +1,10 @@
 (ns ohack.core
   (:use [overtone.live]
         [overtone.inst.piano]
-        [overtone.inst.sampled-piano])
-  (:require [overtone.inst.synth :as synth]))
+        [overtone.inst.sampled-piano]
+        [overtone.synth.stringed])
+  (:require [overtone.inst.synth :as synth]
+            [clojure.string :as s]))
 
 ;; run M-x cider-jack-in to get started
 ;;
