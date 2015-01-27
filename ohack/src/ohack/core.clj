@@ -178,5 +178,8 @@
       index-line-list (filter
                        ;; a tab line must contain "-"
                        (fn [[_ s]] (.contains s "-"))
-                       (into {} (map-indexed vector (s/split-lines guitar-tab))))]
-  index-line-list)
+                       (into {} (map-indexed vector (s/split-lines guitar-tab))))
+
+      ]
+  ;; now we have all the indices of lines we care about
+  (map first index-line-list))
