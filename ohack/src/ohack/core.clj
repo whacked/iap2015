@@ -208,6 +208,14 @@
   )
 
 ;; we want a function that takes a regex and returns the position of the match...
+;; turns out someone asked for the exact same thing on SO!
+;; http://stackoverflow.com/questions/21191045/get-string-indices-from-the-result-of-re-seq
+(defn re-seq-pos [pattern string]
+  (let [m (re-matcher pattern string)]
+    ((fn step []
+      (when (. m find)
+        (cons {:start (. m start) :end (. m end) :group (. m group)}
+              (lazy-seq (step))))))))
 
 ;; copy a line from the prn output and add in a hammer for good measure:
 (let [line "B|----1-----2----0----3----|--1---0---3------|--1---0---3---0h1-|--1---3------|"]
