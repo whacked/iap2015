@@ -94,3 +94,6 @@
   #+BEGIN_SRC sh :eval never
   lein new ohack
   #+END_SRC
+
+  within =ohack=, update the dependencies in =project.clj=, open
+  =src/ohack/core.clj=, and run =M-x cider-jack-in=
