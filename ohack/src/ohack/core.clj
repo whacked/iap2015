@@ -1,6 +1,5 @@
-(ns ohack.core)
-
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(ns ohack.core
+  (:use [overtone.live]
+        [overtone.inst.piano]
+        [overtone.inst.sampled-piano])
+  (:require [overtone.inst.synth :as synth]))
