@@ -186,7 +186,7 @@
   ;; blocks of 6 lines must occur with consecutive line
   ;; indexes, so lets detect that.
 
-  (loop [input (map first index-line-list)
+  (loop [input (sort (map first index-line-list))
          ;; use a buffer to store incoming consecutive indexes
          buf []
          rtn []]
@@ -210,10 +210,5 @@
                    [cur-val] ;; fresh buffer
                    (conj buf cur-val)) ;; add to buffer
                  next-rtn)))))
-
-  ;; why doesn't it work???
-  ;; what does `input` look like?
-  (map first index-line-list)
-  ;; it's out of order!!!
 
   )
