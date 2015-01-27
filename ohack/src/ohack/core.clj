@@ -131,3 +131,11 @@
     (doseq [[[string fret] timeval] (map vector noteseq timeseq)]
       (playguitar string fret timeval))))
 
+(def playguitar320
+  (partial guitar-pick-note-sequence 320))  ;; 320ms delay between picked strings
+
+;; now we can play a sequence of notes defined by
+;; [string-index fret-value]
+(playguitar320 [[0 8] [0 10] [0 12] [0 13] [0 15]]) ;;C scale on low E
+(playguitar320 [[4 1] [4 3] [4 5] [4 6] [4 8]])     ;;C scale on b string
+
