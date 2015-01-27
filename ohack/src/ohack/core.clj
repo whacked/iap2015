@@ -242,6 +242,8 @@
 
   ;; map over each 6-line-set...
   (doseq [line-set sorted-grouped-line-set-list]
-    (prn line-set))
+    ;; map over each line in the line-set, with string index
+    (doseq [[string-index tab-line] (map-indexed vector line-set)]
+      (prn string-index tab-line)))
 
   )
