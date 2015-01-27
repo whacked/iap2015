@@ -1,0 +1,29 @@
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto
+#+OPTIONS: html-preamble:t html-scripts:t html-style:t html5-fancy:nil
+#+OPTIONS: tex:t
+#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.1 (<a href="http://orgmode.org">Org</a> mode 8.0)
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_HEAD:
+#+HTML_HEAD_EXTRA:
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+#+INFOJS_OPT:
+#+LATEX_HEADER:
+#+TITLE: fun with clojure+overtone
+
+* first steps
+
+  1. make sure you have =Emacs 24.3= or above and =git=
+  2. rename your current emacs config files (=~/.emacs=, =~/.emacs.d= to
+     something else)
+  2. git clone https://github.com/overtone/emacs-live
+
+     it is possible to run overtone in your own environment, but
+     =emacs-live= saves you a lot of trouble. however, it is also a
+     highly opinionated starter kit and comes with a bunch of
+     pre-cusomizations.  to add your own and play nice with the
+     emacs-live defaults, follow the instructions at
+
+     http://overtone.github.io/emacs-live/doc-customisation.html
