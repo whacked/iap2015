@@ -173,8 +173,10 @@
 
 ;; first, filter out all lines that don't look like guitar lines
 ;; use map-index because we need to keep ordering information
-(let [guitar-tab fast-car-tab]
-  (filter
-   ;; a tab line must contain "-"
-   (fn [[_ s]] (.contains s "-"))
-   (into {} (map-indexed vector (s/split-lines guitar-tab)))))
+(let [guitar-tab fast-car-tab
+
+      index-line-list (filter
+                       ;; a tab line must contain "-"
+                       (fn [[_ s]] (.contains s "-"))
+                       (into {} (map-indexed vector (s/split-lines guitar-tab))))]
+  index-line-list)
