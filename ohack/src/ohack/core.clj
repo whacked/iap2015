@@ -161,3 +161,5 @@
 ;; we're going to fetch the tab from
 ;; http://tabs.ultimate-guitar.com/t/tracy_chapman/fast_car_ver8_tab.htm
 (def fast-car-html (slurp "http://tabs.ultimate-guitar.com/t/tracy_chapman/fast_car_ver8_tab.htm"))
+;; verify we grabbed some html?
+(print (.substring fast-car-html 2000 3000))
