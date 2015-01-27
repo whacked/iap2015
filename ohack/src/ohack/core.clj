@@ -171,6 +171,42 @@
 
 ;; let's iteratively write a simple parser for this
 
+(defn collect-into-consecutive
+  "collect indexes into sets of N consecutive indexes,
+  discarding all other indexes.
+
+  N defaults to 6 (for guitar tabs)"
+
+  ([index-list]
+   (collect-into-consecutive index-list 6))
+
+  ([index-list required-length]
+   (loop [input (sort index-list)
+          ;; use a buffer to store incoming consecutive indexes
+          buf []
+          rtn []]
+     ;; we need to add buf to rtn if buf has 6 elements
+     (let [buf-full? (= required-length (count buf))
+           next-rtn (if buf-full? (conj rtn buf) rtn)]
+       (if (empty? input)
+         next-rtn
+         (let [last-val (last buf)
+               cur-val (first input)]
+           (recur (rest input)
+                  ;; we need to send a fresh buffer if:
+                  ;; it is full, OR
+                  ;; the incoming value is not a consecutive index
+                  ;; relative to the last value in the buffer, OR
+                  ;; the buffer is empty (i.e. first iteration,
+                  ;; thus last-val is nil)
+                  (if (or (nil? last-val) ;; also short-circuits the subtraction
+                          buf-full?
+                          (not= 1 (- cur-val last-val)))
+                    [cur-val]           ;; fresh buffer
+                    (conj buf cur-val)) ;; add to buffer
+                  next-rtn))))))
+  )
+
 ;; first, filter out all lines that don't look like guitar lines
 ;; use map-index because we need to keep ordering information
 (let [guitar-tab fast-car-tab
@@ -181,37 +217,6 @@
                        (into {} (map-indexed vector (s/split-lines guitar-tab))))
 
       ]
-  ;; now we have all the indices of lines we care about
-  ;; and we need to group them into blocks of 6 lines.
-  ;; blocks of 6 lines must occur with consecutive line
-  ;; indexes, so lets detect that.
-
-
-
-  ;; we should move this to a separate function...
-  (loop [input (sort (map first index-line-list))
-         ;; use a buffer to store incoming consecutive indexes
-         buf []
-         rtn []]
-    ;; we need to add buf to rtn if buf has 6 elements
-    (let [buf-full? (= 6 (count buf))
-          next-rtn (if buf-full? (conj rtn buf) rtn)]
-      (if (empty? input)
-        next-rtn
-        (let [last-val (last buf)
-              cur-val (first input)]
-          (recur (rest input)
-                 ;; we need to send a fresh buffer if:
-                 ;; it is full, OR
-                 ;; the incoming value is not a consecutive index
-                 ;; relative to the last value in the buffer, OR
-                 ;; the buffer is empty (i.e. first iteration,
-                 ;; thus last-val is nil)
-                 (if (or (nil? last-val) ;; also short-circuits the subtraction
-                         buf-full?
-                         (not= 1 (- cur-val last-val)))
-                   [cur-val] ;; fresh buffer
-                   (conj buf cur-val)) ;; add to buffer
-                 next-rtn)))))
+  (collect-into-consecutive (map first index-line-list))
 
   )
