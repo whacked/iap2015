@@ -241,10 +241,7 @@
 ;; first, filter out all lines that don't look like guitar lines
 ;; use map-index because we need to keep ordering information
 (let [
-      ;; guitar-tab fast-car-tab
-
-      ;; something seems wrong. let's try everybody-hurts
-      guitar-tab everybody-hurts
+      guitar-tab fast-car-tab
 
       index-line-list (filter
                        ;; a tab line must contain "-"
