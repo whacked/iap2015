@@ -274,9 +274,10 @@
   ;; map over each 6-line-set...
   (doseq [line-set sorted-grouped-line-set-list]
     ;; map over each line in the line-set, with string index
+    (println "============")
     (doseq [[string-index tab-line] (map-indexed vector line-set)]
-      (prn string-index tab-line)
       ;; now we need to parse the tab-line...
+      (prn string-index (into {} (parse-guitar-tab-line tab-line)))
       ))
 
   )
