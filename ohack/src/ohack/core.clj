@@ -225,7 +225,12 @@
     ;; now we will have a seq of [index value] pairs
     (map
      (fn [m] [(:start m) (Integer/parseInt (:group m))])
-     (re-seq-pos #"\d+" tab-string))))
+     (re-seq-pos #"\d+" tab-string))
+    ;; construct a hashmap of index -> stuff to play
+    ;; spanning the length of the line
+    (zipmap (range (count tab-string)) (cycle [nil]))
+
+    ))
 
 ;; first, filter out all lines that don't look like guitar lines
 ;; use map-index because we need to keep ordering information
