@@ -272,18 +272,18 @@
       ]
 
   ;; map over each 6-line-set...
-  (doseq [line-set sorted-grouped-line-set-list]
-    ;; map over each line in the line-set, with string index
-    (println "============"
-             (apply
-              merge-with concat
-              (for [[string-index tab-line] (map-indexed vector line-set)]
-                ;; now we need to parse the tab-line...
-                ;; collect each string's results into into {}
-                (into {}
-                      (map (fn [[k v]] (if v
-                                        [k [string-index v]]))
-                           (parse-guitar-tab-line tab-line)))
-                ))))
+  (doseq [play-map (for [line-set sorted-grouped-line-set-list]
+                      ;; map over each line in the line-set, with string index
+                      (apply
+                       merge-with concat
+                       (for [[string-index tab-line] (map-indexed vector line-set)]
+                         ;; now we need to parse the tab-line...
+                         ;; collect each string's results into into {}
+                         (into {}
+                               (map (fn [[k v]] (if v
+                                                 [k [string-index v]]))
+                                    (parse-guitar-tab-line tab-line)))
+                         )))]
+    (prn play-map))
 
   )
