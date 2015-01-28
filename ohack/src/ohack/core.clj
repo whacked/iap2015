@@ -291,6 +291,6 @@
                         )
         max-beat (apply max (keys play-map))
         ]
-    max-beat)
+    (playguitar320 (map play-map (range max-beat))))
 
   )
