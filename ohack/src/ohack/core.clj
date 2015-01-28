@@ -240,62 +240,58 @@
 
 ;; first, filter out all lines that don't look like guitar lines
 ;; use map-index because we need to keep ordering information
-(let [
-      guitar-tab fast-car-tab
+(defn play-tab [guitar-tab]
+  (let [index-line-list (filter
+                         ;; a tab line must contain "-"
+                         (fn [[_ s]] (.contains s "-"))
+                         (into {} (map-indexed vector (s/split-lines guitar-tab))))
+        index-to-line (into {} index-line-list)
 
-      index-line-list (filter
-                       ;; a tab line must contain "-"
-                       (fn [[_ s]] (.contains s "-"))
-                       (into {} (map-indexed vector (s/split-lines guitar-tab))))
-      index-to-line (into {} index-line-list)
+        ;; collect-into-consecutive will return
+        ;; a seq containing sets of 6 consecutive indexes [i_{n+0} ... i_{n+5}]
+        ;; which we assume map to sets of 6 lines within the tab file.
+        ;; in other words we are ignoring all the intervening lines, be them
+        ;; comments or dynamics or major chord labels or whatnot
+        ;; NOTE keys() here acts the same as (map first index-line-list)
+        ;; since index-line-list is not a hash-map
+        index-group-list (collect-into-consecutive (keys index-line-list))
 
-      ;; collect-into-consecutive will return
-      ;; a seq containing sets of 6 consecutive indexes [i_{n+0} ... i_{n+5}]
-      ;; which we assume map to sets of 6 lines within the tab file.
-      ;; in other words we are ignoring all the intervening lines, be them
-      ;; comments or dynamics or major chord labels or whatnot
-      ;; NOTE keys() here acts the same as (map first index-line-list)
-      ;; since index-line-list is not a hash-map
-      index-group-list (collect-into-consecutive (keys index-line-list))
+        ;; from the 6-line groups, get lines from the original index-line maps
+        ;; and sorted by increasing line indexes.
+        ;; how this works:
+        ;; 1. each set of 6 indexes gets passed to the lambda function
+        ;; 2. using index-to-line, select the 6 matching lines as a hash-map
+        ;; 3. sort by keys to ensure increasing line index order
+        ;; 4. get the vals, i.e., the lines in correct order
+        ;; now, we have a seq containing sets of 6 lines
+        sorted-grouped-line-set-list (map #(vals (sort (select-keys index-to-line %)))
+                                          ;; these will be grouped into sets of 6 lines, with indexes
+                                          (sort index-group-list))
 
-      ;; from the 6-line groups, get lines from the original index-line maps
-      ;; and sorted by increasing line indexes.
-      ;; how this works:
-      ;; 1. each set of 6 indexes gets passed to the lambda function
-      ;; 2. using index-to-line, select the 6 matching lines as a hash-map
-      ;; 3. sort by keys to ensure increasing line index order
-      ;; 4. get the vals, i.e., the lines in correct order
-      ;; now, we have a seq containing sets of 6 lines
-      sorted-grouped-line-set-list (map #(vals (sort (select-keys index-to-line %)))
-                                        ;; these will be grouped into sets of 6 lines, with indexes
-                                        (sort index-group-list))
+        play! (partial guitar-pick-note-sequence 80)
+        ]
 
-      play! (partial guitar-pick-note-sequence 80)
-      ]
+    ;; now we apply to everything
+    (play!
+     (apply
+      concat
+      (map (fn [play-map]
+             (let [max-beat (apply max (keys play-map))]
+               (map play-map (range max-beat))))
+           (for [line-set sorted-grouped-line-set-list]
+             ;; map over each line in the line-set, with string index
+             (apply
+              merge-with concat
+              ;; note the reverse
+              (for [[string-index tab-line] (map-indexed vector (reverse line-set))]
+                ;; now we need to parse the tab-line...
+                ;; collect each string's results into into {}
+                (into {}
+                      ;; create index -> []
+                      ;; when no string is played, for rest
+                      (map (fn [[k v]] [k (if v
+                                           [string-index v]
+                                           [])])
+                           (parse-guitar-tab-line tab-line)))))))))))
 
-  ;; now we apply to everything
-  (play!
-   (apply
-    concat
-    (map (fn [play-map]
-           (let [max-beat (apply max (keys play-map))]
-             (map play-map (range max-beat))))
-         (for [line-set sorted-grouped-line-set-list]
-           ;; map over each line in the line-set, with string index
-           (apply
-            merge-with concat
-            ;; note the reverse
-            (for [[string-index tab-line] (map-indexed vector (reverse line-set))]
-              ;; now we need to parse the tab-line...
-              ;; collect each string's results into into {}
-              (into {}
-                    ;; create index -> []
-                    ;; when no string is played, for rest
-                    (map (fn [[k v]] [k (if v
-                                         [string-index v]
-                                         [])])
-                         (parse-guitar-tab-line tab-line))))))))))
-
-;; ok, listening to the version on youtube, we realize that the song is
-;; in a different key. we're not accounting for the Capo in the tab.
-;; that... is left as an exercise
+(play-tab fast-car-tab)
