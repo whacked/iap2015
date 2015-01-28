@@ -281,7 +281,8 @@
                           ;; map over each line in the line-set, with string index
                           (apply
                            merge-with concat
-                           (for [[string-index tab-line] (map-indexed vector line-set)]
+                           ;; note the reverse
+                           (for [[string-index tab-line] (map-indexed vector (reverse line-set))]
                              ;; now we need to parse the tab-line...
                              ;; collect each string's results into into {}
                              (into {}
