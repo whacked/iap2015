@@ -288,7 +288,9 @@
                                                         [])])
                                         (parse-guitar-tab-line tab-line)))
                              )))
-                        )]
-    play-map)
+                        )
+        max-beat (apply max (keys play-map))
+        ]
+    max-beat)
 
   )
