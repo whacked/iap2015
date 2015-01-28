@@ -280,8 +280,11 @@
                          ;; now we need to parse the tab-line...
                          ;; collect each string's results into into {}
                          (into {}
-                               (map (fn [[k v]] (if v
-                                                 [k [string-index v]]))
+                               ;; create index -> []
+                               ;; when no string is played, for rest
+                               (map (fn [[k v]] [k (if v
+                                                    [string-index v]
+                                                    [])])
                                     (parse-guitar-tab-line tab-line)))
                          )))]
     (prn play-map))
