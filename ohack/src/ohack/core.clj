@@ -217,8 +217,14 @@
         (cons {:start (. m start) :end (. m end) :group (. m group)}
               (lazy-seq (step))))))))
 
-;; copy a line from the prn output and add in a hammer for good measure:
-(let [line "B|----1-----2----0----3----|--1---0---3------|--1---0---3---0h1-|--1---3------|"]
+(defn parse-guitar-tab-line
+  "reads a single well-formed line from the guitar tab
+  and returns a seq of seq, where each inner seq takes the form of
+  [index fret-value]
+  index = at what index in time the pluck should occur
+  fret-value = being which fret to pluck; nil if it should be rest
+  "
+  [line]
   ;; filter out everything before the actual guitar line "- ..." part
   ;; note: drop-while predicate needs a char (\-), not a string ("-")!
   (let [tab-string (apply str (drop-while #(not= % \-) line))]
