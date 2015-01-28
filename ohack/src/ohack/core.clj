@@ -272,21 +272,23 @@
       ]
 
   ;; map over each 6-line-set...
-  (doseq [play-map (for [line-set sorted-grouped-line-set-list]
-                      ;; map over each line in the line-set, with string index
-                      (apply
-                       merge-with concat
-                       (for [[string-index tab-line] (map-indexed vector line-set)]
-                         ;; now we need to parse the tab-line...
-                         ;; collect each string's results into into {}
-                         (into {}
-                               ;; create index -> []
-                               ;; when no string is played, for rest
-                               (map (fn [[k v]] [k (if v
-                                                    [string-index v]
-                                                    [])])
-                                    (parse-guitar-tab-line tab-line)))
-                         )))]
-    (prn play-map))
+  ;; using the first value as example let's get the playable notes
+  (let [play-map (first (for [line-set sorted-grouped-line-set-list]
+                          ;; map over each line in the line-set, with string index
+                          (apply
+                           merge-with concat
+                           (for [[string-index tab-line] (map-indexed vector line-set)]
+                             ;; now we need to parse the tab-line...
+                             ;; collect each string's results into into {}
+                             (into {}
+                                   ;; create index -> []
+                                   ;; when no string is played, for rest
+                                   (map (fn [[k v]] [k (if v
+                                                        [string-index v]
+                                                        [])])
+                                        (parse-guitar-tab-line tab-line)))
+                             )))
+                        )]
+    play-map)
 
   )
