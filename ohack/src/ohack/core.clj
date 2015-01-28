@@ -294,7 +294,8 @@
                     (map (fn [[k v]] [k (if v
                                          [string-index v]
                                          [])])
-                         (parse-guitar-tab-line tab-line)))))))))
+                         (parse-guitar-tab-line tab-line))))))))))
 
-
-)
+;; ok, listening to the version on youtube, we realize that the song is
+;; in a different key. we're not accounting for the Capo in the tab.
+;; that... is left as an exercise
