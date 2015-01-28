@@ -222,7 +222,10 @@
   ;; filter out everything before the actual guitar line "- ..." part
   ;; note: drop-while predicate needs a char (\-), not a string ("-")!
   (let [tab-string (apply str (drop-while #(not= % \-) line))]
-    (re-seq-pos #"\d+" tab-string)))
+    ;; now we will have a seq of [index value] pairs
+    (map
+     (fn [m] [(:start m) (Integer/parseInt (:group m))])
+     (re-seq-pos #"\d+" tab-string))))
 
 ;; first, filter out all lines that don't look like guitar lines
 ;; use map-index because we need to keep ordering information
