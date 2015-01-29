@@ -714,3 +714,7 @@
           :instrument inst))
 
   )
+
+;; playing notes using fixed slots for beats and rests is a bit restrictive.
+;; let's make a play function that allows you to specify individual note
+;; attributes (yes, i know we're kind of reinventing midi here)
