@@ -426,3 +426,9 @@
 
 ;; keep it on if you want, or stop it
 (t/stop)
+
+;; you can look into the glsl file to see how it works.  the edits you
+;; make to the glsl file will be updated live.  if you really want to go
+;; down this route, you'll have to understand GLSL... so we'll leave it
+;; at that.  if you want to learn more, https://www.shadertoy.com/ is a
+;; neat place to check out
