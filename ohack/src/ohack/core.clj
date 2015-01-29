@@ -362,7 +362,13 @@
       ;; for the tab text, use a lighter color
       (q/fill 220)
       (let [notes (nth (@vis-state :play-list) ith)]
-        (q/text (str "X") x0 y0)
+        (doseq [[string-index fret-index] (partition 2 notes)]
+          (q/text (str fret-index)
+                  (+ x0 (* block-width ith))
+                  (+ y0 40 block-height
+                     (- 120 (* 20 string-index)))
+                  )
+          )
         )
       ))
   )
