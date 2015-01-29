@@ -655,5 +655,6 @@
 (swap! mystate update-in [:track-list :tetris-bassline :muted] not)
 (swap! mystate update-in [:track-list :beat-my-hat :muted] not)
 
+(stop)
 
 ;; let's try one more thing
