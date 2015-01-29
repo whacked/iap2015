@@ -386,7 +386,7 @@
             (ctl my-guitar :gate 0)
             (doseq [[string-index fret-index] (partition 2 (nth (:play-list @vis-state) (:index @vis-state)))]
               ;; try it out
-              (guitar-pick (guitar) string-index fret-index))
+              (play-guitar string-index fret-index))
             ;; advance the index after the notes get played
             ;; oops... i mean inc
             (swap! vis-state assoc :index (inc (:index @vis-state)))
