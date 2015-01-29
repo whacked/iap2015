@@ -679,3 +679,31 @@
                         ;; construct a map where keys are the next element
                         ;; and values are the times that element has shown up
                         (assoc el-map next-el (inc (el-map next-el 0))))))))))
+
+(defn get-next-from-xns-map
+  "given a transition map and a current value that is inside that map,
+  probabilistically select a subsequent value. an optional default
+  can be given, else nil is returned"
+  ([xns-map current] (get-next-from-xns-map xns-map current nil))
+  ([xns-map current default]
+   (or (if-let [next-candidate-map (xns-map current)]
+         ;; select the next value with probabilities based on
+         ;; relative counts of the possible outcomes in the map
+         (let [choice-list (seq next-candidate-map)
+               cumsum (reduce + (map second choice-list))
+               choice (rand-int cumsum)
+               ]
+           (loop [start-sum 0
+                  choice-list choice-list
+                  ]
+             (let [[value proportion] (first choice-list)
+                   cur-sum (+ start-sum proportion)]
+               (if (< choice cur-sum)
+                 value
+                 (recur cur-sum
+                        (rest choice-list))
+                 )))
+
+           )
+         )
+       default)))
