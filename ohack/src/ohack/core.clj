@@ -341,7 +341,8 @@
     ;; iterate through the note list
     (doseq [ith (range n-block)]
 
-
+      (q/stroke 40 40 0)
+      (q/stroke-weight 2)
 
       (q/fill 200)
       (q/text (str ith)
