@@ -524,4 +524,8 @@
                   [t-melody melody-scale square-wave]
                   ]
 
-      ])
+      ]
+  ;; stop all playback before starting a new one
+  (stop)
+
+  )
