@@ -388,7 +388,8 @@
               ;; try it out
               (guitar-pick (guitar) string-index fret-index))
             ;; advance the index after the notes get played
-            (swap! vis-state assoc :index (dec (:index @vis-state)))
+            ;; oops... i mean inc
+            (swap! vis-state assoc :index (inc (:index @vis-state)))
             )]
     ;; now we just evaluate the whole let block
     (vis-play))
