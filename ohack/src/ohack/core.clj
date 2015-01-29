@@ -537,3 +537,6 @@
           :instrument inst))
 
   )
+
+;; now we want to spice it up with a beat.
+;; let's make a little track player and use a metronome
