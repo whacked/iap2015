@@ -432,3 +432,5 @@
 ;; down this route, you'll have to understand GLSL... so we'll leave it
 ;; at that.  if you want to learn more, https://www.shadertoy.com/ is a
 ;; neat place to check out
+
+;; moving along
