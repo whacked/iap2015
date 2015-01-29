@@ -366,12 +366,7 @@
           (q/text (str fret-index)
                   (+ x0 (* block-width ith))
                   (+ y0 40 block-height
-                     (- 120 (* 20 string-index)))
-                  )
-          )
-        )
-      ))
-  )
+                     (- 120 (* 20 string-index)))))))))
 
 ;; you can swap the @vis-state :index and watch the highlighted
 ;; box change on the fly
