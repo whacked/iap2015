@@ -332,7 +332,15 @@
 
   (let [x0 10 ;; offsets
         y0 10
+
+        n-block (count (@vis-state :play-list))
         ]
+
+    ;; iterate through the note list
+    (doseq [ith (range n-block)]
+      ;; stuff here
+      )
+
     (q/fill 200)
     (q/text "HELLO WORLD" x0 y0))
   )
