@@ -517,4 +517,11 @@
       melody-scale :C5
       majmin :major
 
+      ;; we will iterate over this: melody, root scale, instrument
+      track-list [
+                  [t-bass bass-scale triangle-wave]
+                  [t-alto bass-scale square-wave]
+                  [t-melody melody-scale square-wave]
+                  ]
+
       ])
