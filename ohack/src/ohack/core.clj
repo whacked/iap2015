@@ -434,3 +434,36 @@
 ;; neat place to check out
 
 ;; moving along
+
+;; let's define a little melody
+(def t-melody (let [_ nil
+                    motif [:iii _ :vii- :i     :ii _ :i :vii-     :vi- _ :vi- :i      :iii _ :ii :i
+                           :vii- _ :vii- :i     :ii _ :iii _     :i _ :vi- _      :vi- _ _ _
+                           _ :ii _ :iv    :vi _ :v :iv    :iii _ :i :ii     :iii _ :ii :i
+                           :vii- _ :vii- :i :ii _ :iii _ :i _ :vi- _ :vi- _ _ _]
+                    ;; interlude [:iii _ _ _ :i _ _ _ :ii _ _ _ :vii- _ _ _
+                    ;;            :i _ _ _ :vi- _ _ _ :v-# _ _ _ :vii- _ _ _
+                    ;;            :iii _ _ _ :i _ _ _ :ii _ _ _ :vii- _ _ _
+                    ;;            :i _ :iii _ :vi _ _ _ :v# _ _ _ _ _ _ _]
+                    ]
+                (interleave (concat
+                             ;; deliberately shortening it here
+                             motif
+                             ;; motif interlude motif
+                             )
+                            (cycle [_]))))
+(def t-alto (let [_ nil]
+              [:vii _  _ _  :v# _  :vi _  :vii _ :iii+ :ii+ :vi _ :v _
+               :iii _  _ _  :iii _ :vi _  :i+ _ _ _ :vii _ :vi _
+               :v# :v# :iii _  :v# _ :vi _    :vii _ _ _ :i+ _ _ _
+               :vi _ _ _ :iii _ _ _ :iii _ _ _     _ _ _ _
+               _ _ :iv _    _ _ :vi _    :i+ _ :i+ :i+    :vii _ :vi _
+               :v _   _ _ _ _   :iii _  :v _ :vi :v :iv _ :iii _
+               :v# _ :iii _ :v# _ :vi _  :vii _ :v _ :i+ _ :v _
+               :vi _ :iii _ :iii _ _ _   :iii _ _ _  _ _ _ _ _ _ _ _]))
+(def t-bass (let [_ nil]
+              (interleave [:iii-- :iii- :iii-- :iii-  :iii-- :iii- :iii-- :iii-       :vi-- :vi- :vi-- :vi- :vi-- :vi- :vi-- :vi-
+                           :v#-- :v#- :v#-- :v#-  :iii-- :iii- :iii-- :iii-       :vi-- :vi- :vi-- :vi-   :vi-- :vi- :vii-- :i-
+                           :ii- :ii-- _ :ii--   _ :ii-- :vi-- :iv--     :i-- :i- _ :i-          :i-- :v-- :v-- :i--
+                           :vii-- :vii- _ :vii-    :iii- _ :v#- _   :vi-- :iii- :vi-- :iii-    :vi-- _ _ _]
+                          (cycle [_]))))
