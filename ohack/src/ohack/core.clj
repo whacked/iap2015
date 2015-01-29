@@ -615,8 +615,8 @@
                            nil
                            (first (->hz (:melody (track-map track-name)))))]
            (at (metro time-tick)
-               ;; wait... we need to customize instruments
-               (square-wave note)))))
+               ;; now it plays a single note with all the instruments
+               ((:instrument track-state) note)))))
      )
    (metro)
    (@mystate :track-list)
