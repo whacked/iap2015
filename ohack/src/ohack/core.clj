@@ -360,7 +360,11 @@
               (+ y0 20 block-height))
 
       ;; for the tab text, use a lighter color
-      (q/fill 220)))
+      (q/fill 220)
+      (let [notes (nth (@vis-state :play-list) ith)]
+        (q/text (str "X") x0 y0)
+        )
+      ))
   )
 
 ;; you can swap the @vis-state :index and watch the highlighted
