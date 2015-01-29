@@ -706,10 +706,10 @@
   (stop)
 
   (doseq [[note-seq scale inst] track-list]
-    ;; slurp the play expression...
-    ;; change the arguments...
-    ;; and play.
-    (play (->hz (degrees->pitches note-seq majmin scale))
+    (play (->hz (degrees->pitches
+                 ;; we can change just this part...
+                 note-seq
+                 majmin scale))
           :speed tempo
           :instrument inst))
 
