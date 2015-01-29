@@ -332,10 +332,9 @@
 
   (let [x0 10 ;; offsets
         y0 10
-        ])
-
-  (q/fill 200)
-  (q/text "HELLO WORLD" 10 40)
+        ]
+    (q/fill 200)
+    (q/text "HELLO WORLD" x0 y0))
   )
 
 ;; this launches the sketch
