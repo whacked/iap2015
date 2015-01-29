@@ -343,8 +343,8 @@
 
       (q/fill 200)
       (q/text (str ith)
-              x0
-              y0)))
+              (+ x0 (* block-width ith))
+              (+ y0 40 block-height))))
   )
 
 ;; this launches the sketch
