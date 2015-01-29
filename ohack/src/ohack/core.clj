@@ -579,3 +579,6 @@
         sqr (* (env-gen (perc 0.01 0.04)) (pulse 880 0.2))
         filt (bpf (+ sqr noise) 9000 0.5)]
     (* amp env filt)))
+
+;; you can try them out with
+(my-kick) ;; ... etc
