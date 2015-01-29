@@ -385,7 +385,11 @@
             ;; run (swap! vis-state assoc :index (inc (:index @vis-state)))
             ;; until you reach a section where there are notes to play
             (doseq [[string-index fret-index] (partition 2 (nth (:play-list @vis-state) (:index @vis-state)))]
+              ;; try it out
+              (guitar-pick (guitar) string-index fret-index)
               (prn string-index fret-index)
               )
             )])
   )
+(stop)
+(swap! vis-state assoc :index (dec (:index @vis-state)))
