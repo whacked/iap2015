@@ -399,10 +399,12 @@
           ;; now define a function to play by the metronome
           (play-notes [m beat-num]
             (let [next-beat (inc beat-num)]
-              (at (m (+ 0 beat-num)) (vis-play)))
+              (at (m (+ 0 beat-num)) (vis-play))
+              ;; finally the recursive part
+              (apply-at (m next-beat) play-notes [m next-beat]))
             )
           ]
-    ;; now we can repeatedly eval this block like before
+    ;; it will auto-play forever
     (play-notes metro (metro)))
   )
 (stop)
