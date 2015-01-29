@@ -724,21 +724,20 @@
       gen-note (fn [pitch & [nbeat]]
                  {:pitch pitch
                   :duration (* (or nbeat 1) beat-ms)})
-      ;; fn takes optional function name that allows you to
-      ;; call it from within the body for recursion
-      play (fn play [notes & {:keys [start-time duration instrument]
-                             :or {start-time (now)
-                                  duration beat-ms
-                                  instrument sampled-piano
-                                  }}]
-             (when-not (empty? notes)
-               (when-let [note (first notes)]
-                 (at start-time (instrument note)))
-               (let [next-time (+ start-time duration)]
-                 (apply-at next-time play [(rest notes)
+      ;; now we want play to take maps created by gen-note
+      ;; instead of single pitch values
+      play (fn play [mnotes & {:keys [start-time duration instrument]
+                              :or {start-time (now)
+                                   duration beat-ms
+                                   instrument sampled-piano
+                                   }}]
+             (when-not (empty? mnotes)
+               (when-let [mnote (first mnotes)]
+                 (at start-time (instrument (:pitch mnote))))
+                (let [next-time (+ start-time duration)]
+                 (apply-at next-time play [(rest mnotes)
                                            :start-time next-time
                                            :duration duration
                                            :instrument instrument]))))]
-  ;; (play (range 60 68))
-  (gen-note 60)
+  (play (map gen-note (range 60 68)))
   )
