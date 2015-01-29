@@ -412,3 +412,11 @@
 (metro-bpm metro 180)
 
 (stop)
+
+
+;; let's try something different now
+;; here's a quick demo of shadertone, just for fun
+(require '[shadertone.tone :as t])
+;; added a file in ohack/wave.glsl, which is taken directly from
+;; https://github.com/overtone/shadertone/blob/master/examples
+(t/start "wave.glsl" :width 1000 :height 400)
