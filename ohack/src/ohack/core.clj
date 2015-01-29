@@ -720,11 +720,10 @@
 ;; attributes (yes, i know we're kind of reinventing midi here)
 ;;
 (let [beat-ms 100
-      ;; add a function that takes a note pitch and constructs a map
-      ;; containing the attributes want
-      gen-note (fn [pitch nbeat]
+      ;; make nbeat optional, defaulting to 1 beat
+      gen-note (fn [pitch & [nbeat]]
                  {:pitch pitch
-                  :duration (* nbeat beat-ms)})
+                  :duration (* (or nbeat 1) beat-ms)})
       ;; fn takes optional function name that allows you to
       ;; call it from within the body for recursion
       play (fn play [notes & {:keys [start-time duration instrument]
@@ -740,6 +739,6 @@
                                            :start-time next-time
                                            :duration duration
                                            :instrument instrument]))))]
-  (play (range 60 68)))
   ;; (play (range 60 68))
-  (gen-note 60 2))
+  (gen-note 60)
+  )
