@@ -467,3 +467,21 @@
                            :ii- :ii-- _ :ii--   _ :ii-- :vi-- :iv--     :i-- :i- _ :i-          :i-- :v-- :v-- :i--
                            :vii-- :vii- _ :vii-    :iii- _ :v#- _   :vi-- :iii- :vi-- :iii-    :vi-- _ _ _]
                           (cycle [_]))))
+
+;; define a melody player
+(defn play [notes & {:keys [start-time speed instrument]
+                     :or {start-time (now)
+                          speed 100
+                          instrument sampled-piano
+                          }}]
+  (when-not (empty? notes)
+    (when-let [note (first notes)]
+      (at start-time (instrument note)))
+    (let [next-time (+ start-time speed)]
+      (apply-at next-time play [(rest notes)
+                                :start-time next-time
+                                :speed speed
+                                :instrument instrument]))))
+
+;; you can try it if you want
+(play (degrees->pitches t-melody :major :C4))
