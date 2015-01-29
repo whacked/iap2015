@@ -485,3 +485,6 @@
 
 ;; you can try it if you want
 (play (degrees->pitches t-melody :major :C4))
+
+
+;; instead of the default piano, let's use simple waves
