@@ -549,20 +549,29 @@
 
 ;; here's the track state atom
 (def mystate (atom {:index 0
-                    :track-list {:tetris-melody   (gen-track
-                                                   (degrees->pitches
-                                                    t-melody
-                                                    :major :C5))
-                                 :tetris-alto     (gen-track
-                                                   (degrees->pitches
-                                                    t-alto
-                                                    :major :C4))
-                                 :tetris-bassline (gen-track
-                                                   (degrees->pitches
-                                                    t-bass
-                                                    :major :C3))
+                    :track-list (let [_ nil]
+                                  {:tetris-melody   (gen-track
+                                                     (degrees->pitches
+                                                      t-melody
+                                                      :major :C5))
+                                   :tetris-alto     (gen-track
+                                                     (degrees->pitches
+                                                      t-alto
+                                                      :major :C4))
+                                   :tetris-bassline (gen-track
+                                                     (degrees->pitches
+                                                      t-bass
+                                                      :major :C3))
 
-                                 }
+                                   ;; define some beat tracks
+                                   :beat-my-hat    (gen-track (take 128 (cycle [1 _])))
+                                   :beat-close-hat (gen-track (take 128 (cycle [_ 1])))
+                                   :beat-fs-kick   (gen-track (take 128 (cycle [1 _ _ _  _ _ _ _  _ _ _ _  _ _ _ _])))
+                                   :beat-my-kick   (gen-track (take 128 (cycle [_ _ _ _  _ _ _ _  1 _ _ _  _ _ _ _])))
+                                   :beat-open-hat  (gen-track (take 128 (cycle [_ _ 1 _])))
+                                   :beat-snare     (gen-track (take 128 (cycle [_ _ _ _  1 _ _ _])))
+
+                                   })
                     }))
 
 ;; define some beat making instruments
