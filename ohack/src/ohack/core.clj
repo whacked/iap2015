@@ -302,3 +302,7 @@
 
 ;; let's now introduce quil and whip up a simple visualizater for the tab
 ;; make sure you've added quil to the namespace
+
+;; convenience map for window related config entries
+(def vis-conf {:width 1300
+               :height 360})
