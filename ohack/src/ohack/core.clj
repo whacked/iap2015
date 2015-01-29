@@ -340,11 +340,11 @@
 
     ;; iterate through the note list
     (doseq [ith (range n-block)]
-      ;; stuff here
-      )
 
-    (q/fill 200)
-    (q/text "HELLO WORLD" x0 y0))
+      (q/fill 200)
+      (q/text (str ith)
+              x0
+              y0)))
   )
 
 ;; this launches the sketch
