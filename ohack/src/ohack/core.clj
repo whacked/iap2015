@@ -689,7 +689,7 @@
              (first sample-melody))))
 
 ;; revisiting this old code...
-(let [tempo 100
+(let [tempo 200
       bass-scale :C4
       melody-scale :C5
       majmin :major
@@ -708,7 +708,7 @@
   (doseq [[note-seq scale inst] track-list]
     (play (->hz (degrees->pitches
                  ;; we can change just this part...
-                 note-seq
+                 (make-markov-iterator (remove nil? note-seq))
                  majmin scale))
           :speed tempo
           :instrument inst))
