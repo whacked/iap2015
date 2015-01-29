@@ -511,32 +511,7 @@
 ;; triangular shape of triangle-wave and square shape of square-wave
 (play (->hz (degrees->pitches t-melody :major :C4)) :instrument square-wave)
 
-;; let's write a loop to play them all at once
-(let [tempo 100
-      bass-scale :C4
-      melody-scale :C5
-      majmin :major
-
-      ;; we will iterate over this: melody, root scale, instrument
-      track-list [
-                  [t-bass bass-scale triangle-wave]
-                  [t-alto bass-scale square-wave]
-                  [t-melody melody-scale square-wave]
-                  ]
-
-      ]
-  ;; stop all playback before starting a new one
-  (stop)
-
-  (doseq [[note-seq scale inst] track-list]
-    ;; slurp the play expression...
-    ;; change the arguments...
-    ;; and play.
-    (play (->hz (degrees->pitches note-seq majmin scale))
-          :speed tempo
-          :instrument inst))
-
-  )
+;; !!! moved the play block to the bottom
 
 ;; now we want to spice it up with a beat.
 ;; let's make a little track player and use a metronome
@@ -712,3 +687,30 @@
   (let [xns-map (derive-transition-map sample-melody :wrap-around true)]
     (iterate #(get-next-from-xns-map xns-map %)
              (first sample-melody))))
+
+;; revisiting this old code...
+(let [tempo 100
+      bass-scale :C4
+      melody-scale :C5
+      majmin :major
+
+      ;; we will iterate over this: melody, root scale, instrument
+      track-list [
+                  [t-bass bass-scale triangle-wave]
+                  [t-alto bass-scale square-wave]
+                  [t-melody melody-scale square-wave]
+                  ]
+
+      ]
+  ;; stop all playback before starting a new one
+  (stop)
+
+  (doseq [[note-seq scale inst] track-list]
+    ;; slurp the play expression...
+    ;; change the arguments...
+    ;; and play.
+    (play (->hz (degrees->pitches note-seq majmin scale))
+          :speed tempo
+          :instrument inst))
+
+  )
