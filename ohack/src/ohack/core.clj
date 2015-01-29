@@ -345,7 +345,10 @@
       (q/stroke 40 40 0)
       (q/stroke-weight 2)
       ;; set the box color here using rgb
-      (q/fill 230 100 255)
+      ;; highlight just the box corresponding to the current index
+      (apply q/fill (if (= ith (:index @vis-state))
+                      [230 100 255]
+                      [(+ 20 (* 2 ith))]))
       (q/rect (+ x0 (* block-width ith)) y0
               block-width block-height)
 
