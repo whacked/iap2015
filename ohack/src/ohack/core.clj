@@ -314,3 +314,5 @@
 ;; create an atom for our visualizer's play state
 (def vis-state (atom {:play-list (take 50 (parse-guitar-tab fast-car-tab))
                       :index 0}))
+;; this is a beat generator. it keeps ticking by the given timing
+(def metro (metronome 72))
