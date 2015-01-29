@@ -718,3 +718,22 @@
 ;; playing notes using fixed slots for beats and rests is a bit restrictive.
 ;; let's make a play function that allows you to specify individual note
 ;; attributes (yes, i know we're kind of reinventing midi here)
+;;
+;; first, here's a simple play function
+(let [beat-ms 100
+      ;; fn takes optional function name that allows you to
+      ;; call it from within the body for recursion
+      play (fn play [notes & {:keys [start-time duration instrument]
+                             :or {start-time (now)
+                                  duration beat-ms
+                                  instrument sampled-piano
+                                  }}]
+             (when-not (empty? notes)
+               (when-let [note (first notes)]
+                 (at start-time (instrument note)))
+               (let [next-time (+ start-time duration)]
+                 (apply-at next-time play [(rest notes)
+                                           :start-time next-time
+                                           :duration duration
+                                           :instrument instrument]))))]
+  (play (range 60 68)))
