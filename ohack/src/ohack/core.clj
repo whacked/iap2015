@@ -607,8 +607,11 @@
      (let []
        ;; cheat a little here, by reading the track state from
        ;; the original atom
-       (doseq [[name track] (@mystate :track-list)]
-         ))
+       (doseq [[track-name track-state] (@mystate :track-list)]
+         (when-let [note (if (:muted track-state)
+                           nil
+                           (first (->hz (:melody (track-map track-name)))))]
+           note)))
      )
    (metro)
    (@mystate :track-list)
