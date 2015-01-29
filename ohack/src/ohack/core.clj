@@ -379,4 +379,11 @@
 (let [my-guitar (guitar) ;; want to save it so we can manipulate its gate value
       play-guitar (partial guitar-pick my-guitar) ;; from earlier
       ]
+  (letfn [(vis-play []
+            )])
   )
+
+;; here's our swap code
+(swap! vis-state assoc :index (inc (:index @vis-state)))
+;; inspect the current play list
+(nth (:play-list @vis-state) (:index @vis-state))
