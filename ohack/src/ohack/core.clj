@@ -341,10 +341,12 @@
     ;; iterate through the note list
     (doseq [ith (range n-block)]
 
+
+
       (q/fill 200)
       (q/text (str ith)
               (+ x0 (* block-width ith))
-              (+ y0 40 block-height))))
+              (+ y0 20 block-height))))
   )
 
 ;; this launches the sketch
