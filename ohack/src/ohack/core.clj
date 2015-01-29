@@ -529,16 +529,17 @@
   (stop)
 
   (doseq [[note-seq scale inst] track-list]
-    (prn scale))
 
-  ;; play with one note-seq first
-  ;; we get a list of notes/nil
-  ;; convert to hz for our wave instrument
-  ;; now try it out. NOTE: if you don't supply the :instrument
-  ;; argument, it defaults to piano, which doesn't want Hz.
-  ;; if you want piano, remove the ->hz
-  (play (->hz (degrees->pitches t-bass majmin bass-scale))
-        :speed tempo
-        :instrument triangle-wave)
+    ;; slurp the play expression...
+
+    ;; play with one note-seq first
+    ;; we get a list of notes/nil
+    ;; convert to hz for our wave instrument
+    ;; now try it out. NOTE: if you don't supply the :instrument
+    ;; argument, it defaults to piano, which doesn't want Hz.
+    ;; if you want piano, remove the ->hz
+    (play (->hz (degrees->pitches t-bass majmin bass-scale))
+          :speed tempo
+          :instrument triangle-wave))
 
   )
