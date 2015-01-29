@@ -546,3 +546,21 @@
 (defn gen-track [melody]
   {:melody melody
    :muted false})
+
+;; here's the track state atom
+(def mystate (atom {:index 0
+                    :track-list {:tetris-melody   (gen-track
+                                                   (degrees->pitches
+                                                    t-melody
+                                                    :major :C5))
+                                 :tetris-alto     (gen-track
+                                                   (degrees->pitches
+                                                    t-alto
+                                                    :major :C4))
+                                 :tetris-bassline (gen-track
+                                                   (degrees->pitches
+                                                    t-bass
+                                                    :major :C3))
+
+                                 }
+                    }))
