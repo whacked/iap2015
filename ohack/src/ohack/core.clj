@@ -740,5 +740,6 @@
                                              :start-time next-time
                                              :duration duration
                                              :instrument instrument])))))]
-  (play (map gen-note (range 60 68)))
+  ;; test that it works
+  (play (map #(gen-note % (inc (rand-int 4))) (range 60 68)))
   )
