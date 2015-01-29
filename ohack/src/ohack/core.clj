@@ -604,6 +604,11 @@
 ;; start building the melody player
 (let []
   ((defn play-track-map [time-tick track-map]
+     (let []
+       ;; cheat a little here, by reading the track state from
+       ;; the original atom
+       (doseq [[name track] (@mystate :track-list)]
+         ))
      )
    (metro)
    (@mystate :track-list)
