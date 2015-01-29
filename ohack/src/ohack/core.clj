@@ -488,3 +488,12 @@
 
 
 ;; instead of the default piano, let's use simple waves
+(definst triangle-wave [freq 440 attack 0.0001 sustain 0.1 release 0.3 vol 1.0]
+  (* (env-gen (lin attack sustain release) 1 1 0 1 FREE)
+     (lf-tri freq)
+     vol))
+
+(definst square-wave [freq 440 attack 0.005 sustain 0.15 release 0.3 vol 1.0]
+  (* (env-gen (lin attack sustain release) 1 1 0 1 FREE)
+     (square freq)
+     vol))
