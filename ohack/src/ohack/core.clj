@@ -240,6 +240,11 @@
       (fn [m] [(:start m) (Integer/parseInt (:group m))])
       (re-seq-pos #"\d+" tab-string)))))
 
+;; extract out the parsing section from play-tab() so we can use the
+;; data for visualization
+(defn parse-guitar-tab [guitar-tab]
+  )
+
 ;; first, filter out all lines that don't look like guitar lines
 ;; use map-index because we need to keep ordering information
 (defn play-tab [guitar-tab]
