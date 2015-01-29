@@ -385,7 +385,8 @@
             ;; (feel free to try)
             (ctl my-guitar :gate 0)
             (doseq [[string-index fret-index] (partition 2 (nth (:play-list @vis-state) (:index @vis-state)))]
-              ;; try it out
+              ;; use our own play-guitar function
+              ;; so we get the gate reset
               (play-guitar string-index fret-index))
             ;; advance the index after the notes get played
             ;; oops... i mean inc
