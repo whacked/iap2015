@@ -380,6 +380,9 @@
       play-guitar (partial guitar-pick my-guitar) ;; from earlier
       ]
   (letfn [(vis-play []
+            ;; advance the index BEFORE the notes get played.
+            ;; that way it syncs properly with the playhead
+            (swap! vis-state assoc :index (inc (:index @vis-state)))
             ;; if you omit this, the guitar won't fade quickly enough
             ;; and the audio "fills up" and stutters out after a while.
             ;; (feel free to try)
@@ -388,9 +391,6 @@
               ;; use our own play-guitar function
               ;; so we get the gate reset
               (play-guitar string-index fret-index))
-            ;; advance the index after the notes get played
-            ;; oops... i mean inc
-            (swap! vis-state assoc :index (inc (:index @vis-state)))
             )]
     ;; now we just evaluate the whole let block
     (vis-play))
