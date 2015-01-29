@@ -387,9 +387,10 @@
             (doseq [[string-index fret-index] (partition 2 (nth (:play-list @vis-state) (:index @vis-state)))]
               ;; try it out
               (guitar-pick (guitar) string-index fret-index)
-              (prn string-index fret-index)
               )
-            )])
+            )]
+    ;; now we just evaluate the whole let block
+    (vis-play))
   )
 (stop)
 (swap! vis-state assoc :index (dec (:index @vis-state)))
