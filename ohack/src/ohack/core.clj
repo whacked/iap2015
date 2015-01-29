@@ -532,6 +532,7 @@
     (prn scale))
 
   ;; play with one note-seq first
+  ;; we get a list of notes/nil
   (degrees->pitches t-bass majmin bass-scale)
 
   )
