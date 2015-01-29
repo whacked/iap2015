@@ -619,7 +619,7 @@
                ((:instrument track-state) note))))
        ;; if there are notes left, we need to schedule play-track-map again
        ;; more experimentation
-       (when (some (fn [& x] false) (range 10))
+       (when (some (fn [& x] false) (@mystate :track-list))
          (apply-at (metro next-tick) play-track-map [next-tick
                                                      ;; we need to send in track-map
                                                      ;; where rest() is applied to each :melody value
