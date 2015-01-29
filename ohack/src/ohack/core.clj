@@ -582,3 +582,10 @@
 
 ;; you can try them out with
 (my-kick) ;; ... etc
+
+;; overtone also has convenience methods to load and cache other sounds
+;; directly from freesound.org. we'll use 4 nice percussion sounds
+(def snare (sample (freesound-path 26903)))
+(def close-hat (sample (freesound-path 802)))
+(def open-hat (sample (freesound-path 26657)))
+(def fs-kick (sample (freesound-path 777)))
