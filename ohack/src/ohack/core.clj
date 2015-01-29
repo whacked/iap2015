@@ -381,12 +381,11 @@
       ]
   (letfn [(vis-play []
             ;; try this block, see it behaves correctly.
+            ;; if it's not printing anything,
+            ;; run (swap! vis-state assoc :index (inc (:index @vis-state)))
+            ;; until you reach a section where there are notes to play
             (doseq [[string-index fret-index] (partition 2 (nth (:play-list @vis-state) (:index @vis-state)))]
               (prn string-index fret-index)
               )
             )])
   )
-
-;; here's our swap code
-(swap! vis-state assoc :index (inc (:index @vis-state)))
-;; inspect the current play list
