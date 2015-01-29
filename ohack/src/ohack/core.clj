@@ -512,3 +512,9 @@
 (play (->hz (degrees->pitches t-melody :major :C4)) :instrument square-wave)
 
 ;; let's write a loop to play them all at once
+(let [tempo 100
+      bass-scale :C4
+      melody-scale :C5
+      majmin :major
+
+      ])
