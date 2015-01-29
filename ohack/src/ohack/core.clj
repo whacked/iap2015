@@ -341,8 +341,13 @@
     ;; iterate through the note list
     (doseq [ith (range n-block)]
 
+      ;; draw a bunch of boxes
       (q/stroke 40 40 0)
       (q/stroke-weight 2)
+      ;; set the box color here using rgb
+      (q/fill 230 100 255)
+      (q/rect (+ x0 (* block-width ith)) y0
+              block-width block-height)
 
       (q/fill 200)
       (q/text (str ith)
