@@ -395,8 +395,11 @@
               ;; use our own play-guitar function
               ;; so we get the gate reset
               (play-guitar string-index fret-index))
-            )]
-    ;; now we just evaluate the whole let block
-    (vis-play))
+            )
+          ;; now define a function to play by the metronome
+          (play-notes [m beat-num]
+            )
+          ]
+    (play-notes metro (metro)))
   )
 (stop)
