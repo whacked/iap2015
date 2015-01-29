@@ -637,5 +637,13 @@
                                                      ])))
      )
    (metro)
-   (@mystate :track-list)
+   ;; let's make it play forever now, by constructing a copy of mystate
+   ;; where the tracks are infinite
+   (into {}
+         (map (fn [[k m]]
+                [k (update-in m [:melody]
+                              ;; also make sure they are the same length
+                              ;; or else they will loop at different times!
+                              #(cycle (take 128 %)))])
+              (@mystate :track-list)))
    ))
