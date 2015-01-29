@@ -380,10 +380,10 @@
       play-guitar (partial guitar-pick my-guitar) ;; from earlier
       ]
   (letfn [(vis-play []
-            ;; try this block, see it behaves correctly.
-            ;; if it's not printing anything,
-            ;; run (swap! vis-state assoc :index (inc (:index @vis-state)))
-            ;; until you reach a section where there are notes to play
+            ;; if you omit this, the guitar won't fade quickly enough
+            ;; and the audio "fills up" and stutters out after a while.
+            ;; (feel free to try)
+            (ctl my-guitar :gate 0)
             (doseq [[string-index fret-index] (partition 2 (nth (:play-list @vis-state) (:index @vis-state)))]
               ;; try it out
               (guitar-pick (guitar) string-index fret-index))
