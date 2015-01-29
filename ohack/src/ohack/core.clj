@@ -644,6 +644,7 @@
                 [k (update-in m [:melody]
                               ;; also make sure they are the same length
                               ;; or else they will loop at different times!
+                              ;; t-alto is (mistakenly) length 132
                               #(cycle (take 128 %)))])
               (@mystate :track-list)))
    ))
