@@ -707,3 +707,8 @@
            )
          )
        default)))
+
+(defn make-markov-iterator [sample-melody]
+  (let [xns-map (derive-transition-map sample-melody :wrap-around true)]
+    (iterate #(get-next-from-xns-map xns-map %)
+             (first sample-melody))))
