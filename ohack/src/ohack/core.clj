@@ -348,6 +348,7 @@
       ;; highlight just the box corresponding to the current index
       (apply q/fill (if (= ith (:index @vis-state))
                       [230 100 255]
+                      ;; make a gradient
                       [(+ 20 (* 2 ith))]))
       (q/rect (+ x0 (* block-width ith)) y0
               block-width block-height)
