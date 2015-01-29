@@ -332,3 +332,10 @@
   (q/fill 200)
   (q/text "HELLO WORLD" 10 40)
   )
+
+;; this launches the sketch
+(q/defsketch mysketch
+  :title "visualizer"
+  :setup setup
+  :draw draw
+  :size (map vis-conf [:width :height]))
