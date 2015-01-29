@@ -510,3 +510,5 @@
 ;; if you still have the shadertone window open, you can check out the
 ;; triangular shape of triangle-wave and square shape of square-wave
 (play (->hz (degrees->pitches t-melody :major :C4)) :instrument square-wave)
+
+;; let's write a loop to play them all at once
