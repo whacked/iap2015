@@ -620,9 +620,6 @@
        (doseq [[track-name track-state] (@mystate :track-list)]
          (when-let [note (if (:muted track-state)
                            nil
-                           ;; the beat is broken, because we are treating it
-                           ;; the same way as an instrument expecting a hz
-                           ;; argument
                            (first (->hz (:melody (track-map track-name)))))]
            (at (metro time-tick)
                ;; now it plays a single note with all the instruments
