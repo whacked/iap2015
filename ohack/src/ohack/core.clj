@@ -567,12 +567,17 @@
                                                       :major :C3))
 
                                    ;; define some beat tracks
-                                   :beat-my-hat    (gen-track my-hat    (take 128 (cycle [1 _])))
-                                   :beat-close-hat (gen-track close-hat (take 128 (cycle [_ 1])))
-                                   :beat-fs-kick   (gen-track fs-kick   (take 128 (cycle [1 _ _ _  _ _ _ _  _ _ _ _  _ _ _ _])))
-                                   :beat-my-kick   (gen-track my-kick   (take 128 (cycle [_ _ _ _  _ _ _ _  1 _ _ _  _ _ _ _])))
-                                   :beat-open-hat  (gen-track open-hat  (take 128 (cycle [_ _ 1 _])))
-                                   :beat-snare     (gen-track snare     (take 128 (cycle [_ _ _ _  1 _ _ _])))
+
+                                   ;; to fix the beat problem in the most lazy way
+                                   ;; we will just wrap the percussion instruments in
+                                   ;; a function that will throw away the incoming hz
+                                   ;; value. a nicer method... is left as an exercise
+                                   :beat-my-hat    (gen-track (fn [_] (my-hat))    (take 128 (cycle [1 _])))
+                                   :beat-close-hat (gen-track (fn [_] (close-hat)) (take 128 (cycle [_ 1])))
+                                   :beat-fs-kick   (gen-track (fn [_] (fs-kick))   (take 128 (cycle [1 _ _ _  _ _ _ _  _ _ _ _  _ _ _ _])))
+                                   :beat-my-kick   (gen-track (fn [_] (my-kick))   (take 128 (cycle [_ _ _ _  _ _ _ _  1 _ _ _  _ _ _ _])))
+                                   :beat-open-hat  (gen-track (fn [_] (open-hat))  (take 128 (cycle [_ _ 1 _])))
+                                   :beat-snare     (gen-track (fn [_] (snare))     (take 128 (cycle [_ _ _ _  1 _ _ _])))
 
                                    })
                     }))
