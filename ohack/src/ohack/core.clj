@@ -386,11 +386,11 @@
             ;; until you reach a section where there are notes to play
             (doseq [[string-index fret-index] (partition 2 (nth (:play-list @vis-state) (:index @vis-state)))]
               ;; try it out
-              (guitar-pick (guitar) string-index fret-index)
-              )
+              (guitar-pick (guitar) string-index fret-index))
+            ;; advance the index after the notes get played
+            (swap! vis-state assoc :index (dec (:index @vis-state)))
             )]
     ;; now we just evaluate the whole let block
     (vis-play))
   )
 (stop)
-(swap! vis-state assoc :index (dec (:index @vis-state)))
