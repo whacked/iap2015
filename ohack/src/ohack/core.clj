@@ -626,7 +626,7 @@
                                                            (map
                                                             (fn [[k m]]
                                                               [k (update-in m [:melody] rest)])
-                                                            (@mystate :track-list)))
+                                                            track-map))
                                                      ])))
      )
    (metro)
