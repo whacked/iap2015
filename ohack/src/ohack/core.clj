@@ -599,3 +599,12 @@
 (def open-hat (sample (freesound-path 26657)))
 (def fs-kick (sample (freesound-path 777)))
 ;; it may take a while to download
+
+
+;; start building the melody player
+(let []
+  ((defn play-track-map [time-tick track-map]
+     )
+   (metro)
+   (@mystate :track-list)
+   ))
