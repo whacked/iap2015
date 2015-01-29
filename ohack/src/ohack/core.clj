@@ -719,8 +719,12 @@
 ;; let's make a play function that allows you to specify individual note
 ;; attributes (yes, i know we're kind of reinventing midi here)
 ;;
-;; first, here's a simple play function
 (let [beat-ms 100
+      ;; add a function that takes a note pitch and constructs a map
+      ;; containing the attributes want
+      gen-note (fn [pitch nbeat]
+                 {:pitch pitch
+                  :duration (* nbeat beat-ms)})
       ;; fn takes optional function name that allows you to
       ;; call it from within the body for recursion
       play (fn play [notes & {:keys [start-time duration instrument]
@@ -737,3 +741,5 @@
                                            :duration duration
                                            :instrument instrument]))))]
   (play (range 60 68)))
+  ;; (play (range 60 68))
+  (gen-note 60 2))
