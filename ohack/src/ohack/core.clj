@@ -377,6 +377,6 @@
 
 ;; now we need a player function
 (let [my-guitar (guitar) ;; want to save it so we can manipulate its gate value
-
+      play-guitar (partial guitar-pick my-guitar)
       ]
   )
