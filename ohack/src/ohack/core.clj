@@ -398,6 +398,8 @@
             )
           ;; now define a function to play by the metronome
           (play-notes [m beat-num]
+            (let [next-beat (inc beat-num)]
+              )
             )
           ]
     (play-notes metro (metro)))
