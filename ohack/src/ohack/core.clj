@@ -530,4 +530,8 @@
 
   (doseq [[note-seq scale inst] track-list]
     (prn scale))
+
+  ;; play with one note-seq first
+  (degrees->pitches t-bass majmin bass-scale)
+
   )
