@@ -619,7 +619,9 @@
                ((:instrument track-state) note))))
        ;; if there are notes left, we need to schedule play-track-map again
        (when false
-         ))
+         (apply-at (metro next-tick) play-track-map [next-tick
+
+                                                     ])))
      )
    (metro)
    (@mystate :track-list)
