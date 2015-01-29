@@ -732,12 +732,13 @@
                                    instrument sampled-piano
                                    }}]
              (when-not (empty? mnotes)
-               (when-let [mnote (first mnotes)]
-                 (at start-time (instrument (:pitch mnote))))
-                (let [next-time (+ start-time duration)]
-                 (apply-at next-time play [(rest mnotes)
-                                           :start-time next-time
-                                           :duration duration
-                                           :instrument instrument]))))]
+               (let [{:keys [pitch duration]} (first mnotes)]
+                 (when pitch
+                   (at start-time (instrument pitch)))
+                 (let [next-time (+ start-time duration)]
+                   (apply-at next-time play [(rest mnotes)
+                                             :start-time next-time
+                                             :duration duration
+                                             :instrument instrument])))))]
   (play (map gen-note (range 60 68)))
   )
