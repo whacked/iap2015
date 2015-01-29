@@ -353,6 +353,7 @@
       (q/rect (+ x0 (* block-width ith)) y0
               block-width block-height)
 
+      ;; dimmer
       (q/fill 100)
       (q/text (str ith)
               (+ x0 (* block-width ith))
