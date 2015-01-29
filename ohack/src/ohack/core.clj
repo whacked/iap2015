@@ -376,7 +376,7 @@
   :size (map vis-conf [:width :height]))
 
 ;; now we need a player function
+(let [my-guitar (guitar) ;; want to save it so we can manipulate its gate value
 
-;; you can swap the @vis-state :index and watch the highlighted
-;; box change on the fly
-(swap! vis-state assoc :index (inc (:index @vis-state)))
+      ]
+  )
