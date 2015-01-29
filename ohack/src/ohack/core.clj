@@ -628,3 +628,10 @@
    (metro)
    (@mystate :track-list)
    ))
+
+
+;; experiment around here
+(map
+ (fn [[k m]]
+   k)
+ (@mystate :track-list))
