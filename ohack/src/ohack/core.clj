@@ -407,4 +407,8 @@
     ;; it will auto-play forever
     (play-notes metro (metro)))
   )
+
+;; speed it up
+(metro-bpm metro 180)
+
 (stop)
