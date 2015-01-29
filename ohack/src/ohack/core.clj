@@ -357,7 +357,10 @@
       (q/fill 100)
       (q/text (str ith)
               (+ x0 (* block-width ith))
-              (+ y0 20 block-height))))
+              (+ y0 20 block-height))
+
+      ;; for the tab text, use a lighter color
+      (q/fill 220)))
   )
 
 ;; you can swap the @vis-state :index and watch the highlighted
