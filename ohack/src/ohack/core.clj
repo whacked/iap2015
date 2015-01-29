@@ -295,3 +295,7 @@
                            (parse-guitar-tab-line tab-line)))))))))))
 
 (play-tab fast-car-tab)
+
+
+
+;; let's now introduce quil and whip up a simple visualizater for the tab
