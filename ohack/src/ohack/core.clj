@@ -611,7 +611,8 @@
          (when-let [note (if (:muted track-state)
                            nil
                            (first (->hz (:melody (track-map track-name)))))]
-           note)))
+           (at (metro time-tick)
+               (square-wave note)))))
      )
    (metro)
    (@mystate :track-list)
