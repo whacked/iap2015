@@ -382,7 +382,11 @@
   (letfn [(vis-play []
             ;; advance the index BEFORE the notes get played.
             ;; that way it syncs properly with the playhead
-            (swap! vis-state assoc :index (inc (:index @vis-state)))
+            ;; we also need to modulo the increment
+            ;; so it doesn't out of bounds the list
+            (swap! vis-state assoc :index (mod
+                                           (inc (:index @vis-state))
+                                           (count (:play-list @vis-state))))
             ;; if you omit this, the guitar won't fade quickly enough
             ;; and the audio "fills up" and stutters out after a while.
             ;; (feel free to try)
