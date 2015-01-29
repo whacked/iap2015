@@ -420,3 +420,9 @@
 ;; added a file in ohack/wave.glsl, which is taken directly from
 ;; https://github.com/overtone/shadertone/blob/master/examples
 (t/start "wave.glsl" :width 1000 :height 400)
+
+;; you can then start a window and visualize e.g.
+(guitar-pick (guitar) 0 0)
+
+;; keep it on if you want, or stop it
+(t/stop)
