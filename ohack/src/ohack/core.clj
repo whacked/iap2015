@@ -243,11 +243,6 @@
 ;; extract out the parsing section from play-tab() so we can use the
 ;; data for visualization
 (defn parse-guitar-tab [guitar-tab]
-  )
-
-;; first, filter out all lines that don't look like guitar lines
-;; use map-index because we need to keep ordering information
-(defn play-tab [guitar-tab]
   (let [index-line-list (filter
                          ;; a tab line must contain "-"
                          (fn [[_ s]] (.contains s "-"))
@@ -274,32 +269,36 @@
         sorted-grouped-line-set-list (map #(vals (sort (select-keys index-to-line %)))
                                           ;; these will be grouped into sets of 6 lines, with indexes
                                           (sort index-group-list))
-
-        play! (partial guitar-pick-note-sequence 80)
         ]
 
     ;; now we apply to everything
+    (apply
+     concat
+     (map (fn [play-map]
+            (let [max-beat (apply max (keys play-map))]
+              (map play-map (range max-beat))))
+          (for [line-set sorted-grouped-line-set-list]
+            ;; map over each line in the line-set, with string index
+            (apply
+             merge-with concat
+             ;; note the reverse
+             (for [[string-index tab-line] (map-indexed vector (reverse line-set))]
+               ;; now we need to parse the tab-line...
+               ;; collect each string's results into into {}
+               (into {}
+                     ;; create index -> []
+                     ;; when no string is played, for rest
+                     (map (fn [[k v]] [k (if v
+                                          [string-index v]
+                                          [])])
+                          (parse-guitar-tab-line tab-line))))))))))
+
+;; first, filter out all lines that don't look like guitar lines
+;; use map-index because we need to keep ordering information
+(defn play-tab [guitar-tab]
+  (let [play! (partial guitar-pick-note-sequence 80)]
     (play!
-     (apply
-      concat
-      (map (fn [play-map]
-             (let [max-beat (apply max (keys play-map))]
-               (map play-map (range max-beat))))
-           (for [line-set sorted-grouped-line-set-list]
-             ;; map over each line in the line-set, with string index
-             (apply
-              merge-with concat
-              ;; note the reverse
-              (for [[string-index tab-line] (map-indexed vector (reverse line-set))]
-                ;; now we need to parse the tab-line...
-                ;; collect each string's results into into {}
-                (into {}
-                      ;; create index -> []
-                      ;; when no string is played, for rest
-                      (map (fn [[k v]] [k (if v
-                                           [string-index v]
-                                           [])])
-                           (parse-guitar-tab-line tab-line)))))))))))
+     (parse-guitar-tab guitar-tab))))
 
 (play-tab fast-car-tab)
 
