@@ -4,7 +4,9 @@
         [overtone.inst.sampled-piano]
         [overtone.synth.stringed])
   (:require [overtone.inst.synth :as synth]
-            [clojure.string :as s]))
+            [clojure.string :as s]
+            [quil.core :as q]
+            ))
 
 ;; run M-x cider-jack-in to get started
 ;;
@@ -299,3 +301,4 @@
 
 
 ;; let's now introduce quil and whip up a simple visualizater for the tab
+;; make sure you've added quil to the namespace
