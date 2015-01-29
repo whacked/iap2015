@@ -589,3 +589,4 @@
 (def close-hat (sample (freesound-path 802)))
 (def open-hat (sample (freesound-path 26657)))
 (def fs-kick (sample (freesound-path 777)))
+;; it may take a while to download
