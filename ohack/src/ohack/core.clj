@@ -399,9 +399,10 @@
           ;; now define a function to play by the metronome
           (play-notes [m beat-num]
             (let [next-beat (inc beat-num)]
-              )
+              (at (m (+ 0 beat-num)) (vis-play)))
             )
           ]
+    ;; now we can repeatedly eval this block like before
     (play-notes metro (metro)))
   )
 (stop)
