@@ -564,3 +564,18 @@
 
                                  }
                     }))
+
+;; define some beat making instruments
+(definst my-kick [freq 140 dur 0.2 width 0.1]
+    (let [freq-env (* freq (env-gen (perc 0 (* 0.99 dur))))
+          env (env-gen (perc 0.01 dur) 1 1 0 1 FREE)
+          sqr (* (env-gen (perc 0 0.01)) (pulse (* 2 freq) width))
+          src (sin-osc freq-env)
+          drum (+ sqr (* env src))]
+      (compander drum drum 0.2 1 0.1 0.01 0.01)))
+(definst my-hat [amp 1.0 t 0.20]
+  (let [env (env-gen (perc 0.001 t) 1 1 0 1 FREE)
+        noise (white-noise)
+        sqr (* (env-gen (perc 0.01 0.04)) (pulse 880 0.2))
+        filt (bpf (+ sqr noise) 9000 0.5)]
+    (* amp env filt)))
