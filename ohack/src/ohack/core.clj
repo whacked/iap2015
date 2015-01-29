@@ -618,6 +618,7 @@
                ;; now it plays a single note with all the instruments
                ((:instrument track-state) note))))
        ;; if there are notes left, we need to schedule play-track-map again
+       ;; more experimentation
        (when (some (fn [& x] false) (range 10))
          (apply-at (metro next-tick) play-track-map [next-tick
                                                      ;; we need to send in track-map
