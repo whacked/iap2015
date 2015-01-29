@@ -497,3 +497,16 @@
   (* (env-gen (lin attack sustain release) 1 1 0 1 FREE)
      (square freq)
      vol))
+
+;; now we want to try it out
+;;
+;; note: unlike piano and sampled-piano, which take note values,
+;; wave instruments take Hz!
+;; if you pass the wrong value, it will play, but will not be pleasant.
+;; let's define a converter from note values to Hertz using overtone's
+;; midi->hz function
+(def ->hz (partial map #(and % (midi->hz %))))
+
+;; if you still have the shadertone window open, you can check out the
+;; triangular shape of triangle-wave and square shape of square-wave
+(play (->hz (degrees->pitches t-melody :major :C4)) :instrument square-wave)
