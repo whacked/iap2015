@@ -540,3 +540,9 @@
 
 ;; now we want to spice it up with a beat.
 ;; let's make a little track player and use a metronome
+
+;; convenience fn to make a map, storing the track attributes.
+;; currently we just add the :muted state
+(defn gen-track [melody]
+  {:melody melody
+   :muted false})
