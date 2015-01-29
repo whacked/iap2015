@@ -374,3 +374,9 @@
   :setup setup
   :draw draw
   :size (map vis-conf [:width :height]))
+
+;; now we need a player function
+
+;; you can swap the @vis-state :index and watch the highlighted
+;; box change on the fly
+(swap! vis-state assoc :index (inc (:index @vis-state)))
