@@ -658,3 +658,24 @@
 (stop)
 
 ;; let's try one more thing
+(defn derive-transition-map [el-seq & {:keys [wrap-around] :or {wrap-around false}}]
+  "for a given sequence, get the transition probabilities for one item
+    to the next. the return value is a map looking like
+    {element_1 {element_1_1 count_1_1, element_1_2 count_1_2}
+     element_2 {element_2_8 count_2_8, element_2_1 count_2_1, element_2_3 ...
+   if :wrap-around true is specified, the final element in el-seq
+   is mapped to the first element"
+  (loop [el-seq (concat el-seq [(if wrap-around (first el-seq))])
+         rtn {}]
+    (let [next-el (second el-seq)]
+      (if (nil? next-el)
+        rtn
+        (recur (rest el-seq)
+               (let [cur-el (first el-seq)
+                     el-map (or (rtn cur-el) {})]
+                 ;; each element gets mapped to a map with keys that
+                 ;; are the subsequent element
+                 (assoc rtn cur-el
+                        ;; construct a map where keys are the next element
+                        ;; and values are the times that element has shown up
+                        (assoc el-map next-el (inc (el-map next-el 0))))))))))
