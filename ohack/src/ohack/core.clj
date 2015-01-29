@@ -612,6 +612,7 @@
                            nil
                            (first (->hz (:melody (track-map track-name)))))]
            (at (metro time-tick)
+               ;; wait... we need to customize instruments
                (square-wave note)))))
      )
    (metro)
