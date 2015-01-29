@@ -528,4 +528,6 @@
   ;; stop all playback before starting a new one
   (stop)
 
+  (doseq [[note-seq scale inst] track-list]
+    (prn scale))
   )
