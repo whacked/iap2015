@@ -543,9 +543,11 @@
 
 ;; convenience fn to make a map, storing the track attributes.
 ;; currently we just add the :muted state
-(defn gen-track [melody]
+;; added instrument info
+(defn gen-track [inst melody]
   {:melody melody
-   :muted false})
+   :muted false
+   :instrument inst})
 
 ;; here's the track state atom
 (def mystate (atom {:index 0
