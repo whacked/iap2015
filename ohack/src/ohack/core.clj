@@ -633,5 +633,5 @@
 ;; experiment around here
 (map
  (fn [[k m]]
-   k)
+   [k (update-in m [:melody] rest)])
  (@mystate :track-list))
