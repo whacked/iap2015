@@ -607,7 +607,7 @@
 ;; start building the melody player
 (let []
   ((defn play-track-map [time-tick track-map]
-     (let []
+     (let [next-tick (inc time-tick)]
        ;; cheat a little here, by reading the track state from
        ;; the original atom
        (doseq [[track-name track-state] (@mystate :track-list)]
@@ -616,7 +616,10 @@
                            (first (->hz (:melody (track-map track-name)))))]
            (at (metro time-tick)
                ;; now it plays a single note with all the instruments
-               ((:instrument track-state) note)))))
+               ((:instrument track-state) note))))
+       ;; if there are notes left, we need to schedule play-track-map again
+       (when false
+         ))
      )
    (metro)
    (@mystate :track-list)
