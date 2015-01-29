@@ -321,3 +321,14 @@
 (defn setup []
   (q/smooth) ;; anti aliasing
   (q/frame-rate 15))
+
+;; the draw function gets called on every frame refresh
+(defn draw []
+  ;; set black
+  (q/fill 0)
+  ;; draw a black rect that fills the canvas
+  (q/rect 0 0 (:width vis-conf) (:height vis-conf))
+
+  (q/fill 200)
+  (q/text "HELLO WORLD" 10 40)
+  )
