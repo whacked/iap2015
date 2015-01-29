@@ -311,7 +311,6 @@
 (def vis-conf {:width 1300
                :height 360})
 
-
-;; we can play with this data now. we have a sequence of [string-index
-;; fret-index] or an empty seq if nothing is played
-(take 50 (parse-guitar-tab fast-car-tab))
+;; create an atom for our visualizer's play state
+(def vis-state (atom {:play-list (take 50 (parse-guitar-tab fast-car-tab))
+                      :index 0}))
