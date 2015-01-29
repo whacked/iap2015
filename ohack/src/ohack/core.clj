@@ -647,3 +647,9 @@
                               #(cycle (take 128 %)))])
               (@mystate :track-list)))
    ))
+
+;; you can toggle each track on/off by evaluating e.g.
+(swap! mystate update-in [:track-list :tetris-melody :muted] not)
+(swap! mystate update-in [:track-list :tetris-alto :muted] not)
+(swap! mystate update-in [:track-list :tetris-bassline :muted] not)
+(swap! mystate update-in [:track-list :beat-my-hat :muted] not)
