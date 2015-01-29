@@ -316,3 +316,8 @@
                       :index 0}))
 ;; this is a beat generator. it keeps ticking by the given timing
 (def metro (metronome 72))
+
+;; gets called once, when the vis is created
+(defn setup []
+  (q/smooth) ;; anti aliasing
+  (q/frame-rate 15))
