@@ -380,10 +380,13 @@
       play-guitar (partial guitar-pick my-guitar) ;; from earlier
       ]
   (letfn [(vis-play []
+            ;; try this block, see it behaves correctly.
+            (doseq [[string-index fret-index] (partition 2 (nth (:play-list @vis-state) (:index @vis-state)))]
+              (prn string-index fret-index)
+              )
             )])
   )
 
 ;; here's our swap code
 (swap! vis-state assoc :index (inc (:index @vis-state)))
 ;; inspect the current play list
-(nth (:play-list @vis-state) (:index @vis-state))
