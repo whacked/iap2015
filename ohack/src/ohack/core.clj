@@ -359,6 +359,10 @@
               (+ y0 20 block-height))))
   )
 
+;; you can swap the @vis-state :index and watch the highlighted
+;; box change on the fly
+(swap! vis-state assoc :index (inc (:index @vis-state)))
+
 ;; this launches the sketch
 (q/defsketch mysketch
   :title "visualizer"
