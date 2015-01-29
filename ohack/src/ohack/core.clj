@@ -323,11 +323,16 @@
   (q/frame-rate 15))
 
 ;; the draw function gets called on every frame refresh
+;; we'll do it live! modify and eval draw() and see it update
 (defn draw []
   ;; set black
   (q/fill 0)
   ;; draw a black rect that fills the canvas
   (q/rect 0 0 (:width vis-conf) (:height vis-conf))
+
+  (let [x0 10 ;; offsets
+        y0 10
+        ])
 
   (q/fill 200)
   (q/text "HELLO WORLD" 10 40)
