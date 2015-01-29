@@ -335,6 +335,7 @@
 
         n-block (count (@vis-state :play-list))
         block-width (/ (- (:width vis-conf) (* 2 x0)) n-block)
+        block-height (/ (:height vis-conf) 2)
         ]
 
     ;; iterate through the note list
