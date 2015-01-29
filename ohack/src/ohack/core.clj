@@ -606,8 +606,10 @@
 
 ;; start building the melody player
 (let []
+  (stop)
+  ;; it's too slow, let's change the next-tick to be faster
   ((defn play-track-map [time-tick track-map]
-     (let [next-tick (inc time-tick)]
+     (let [next-tick (+ 0.25 time-tick)]
        ;; cheat a little here, by reading the track state from
        ;; the original atom
        (doseq [[track-name track-state] (@mystate :track-list)]
