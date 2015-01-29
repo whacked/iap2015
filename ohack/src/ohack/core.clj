@@ -622,16 +622,13 @@
          (apply-at (metro next-tick) play-track-map [next-tick
                                                      ;; we need to send in track-map
                                                      ;; where rest() is applied to each :melody value
-
+                                                     (into {}
+                                                           (map
+                                                            (fn [[k m]]
+                                                              [k (update-in m [:melody] rest)])
+                                                            (@mystate :track-list)))
                                                      ])))
      )
    (metro)
    (@mystate :track-list)
    ))
-
-
-;; experiment around here
-(map
- (fn [[k m]]
-   [k (update-in m [:melody] rest)])
- (@mystate :track-list))
