@@ -749,9 +749,12 @@
   )
 
 (map
- (fn [[degree n-nil]])
+ (fn [[degree n-nil]]
+   (gen-note ))
  (partition 2
             (map (fn [part]
                    (if (nil? (first part))
                      (count part)
-                     (first part))) (partition-by nil? t-melody))))
+                     (first part))) (partition-by nil?
+                                                  (degrees->pitches t-melody
+                                                                    :major :C4)))))
