@@ -750,7 +750,7 @@
 
 (map
  (fn [[degree n-nil]]
-   (gen-note ))
+   (gen-note degree ))
  (partition 2
             (map (fn [part]
                    (if (nil? (first part))
