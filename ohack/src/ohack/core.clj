@@ -750,4 +750,5 @@
 
 (map (fn [part]
        (if (nil? (first part))
-         (count part))) (partition-by nil? t-melody))
+         (count part)
+         (first part))) (partition-by nil? t-melody))
