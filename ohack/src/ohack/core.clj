@@ -739,23 +739,26 @@
                    (apply-at next-time play [(rest mnotes)
                                              :start-time next-time
                                              :duration duration
-                                             :instrument instrument])))))]
+                                             :instrument instrument])))))
+
+      ;; move over that map code into a separate function
+      convert-to-new-style (fn [old-melody]
+                             (map
+                              (fn [[degree n-nil]]
+                                (gen-note degree (inc n-nil)))
+                              (partition 2
+                                         (map (fn [part]
+                                                (if (nil? (first part))
+                                                  (count part)
+                                                  (first part))) (partition-by nil?
+                                                                               (degrees->pitches old-melody
+                                                                                                 :major :C4))))))]
   ;; test that it works
   ;; (play (map #(gen-note % (inc (rand-int 4))) (range 60 68)))
 
   (stop)
 
   ;; now let's convert the old t-melody to a duration version
-  (play
-   (map
-    (fn [[degree n-nil]]
-      (gen-note degree (inc n-nil)))
-    (partition 2
-               (map (fn [part]
-                      (if (nil? (first part))
-                        (count part)
-                        (first part))) (partition-by nil?
-                      (degrees->pitches t-melody
-                                        :major :C4))))))
+  (play (convert-to-new-style t-melody))
 
   )
