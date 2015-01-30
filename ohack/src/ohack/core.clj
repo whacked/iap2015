@@ -760,8 +760,15 @@
   (stop)
 
   ;; now let's convert the old t-melody to a duration version
-  (play (convert-to-new-style t-melody :C4))
-  (play (convert-to-new-style t-bass :C3))
+  ;; (play (convert-to-new-style t-melody :C4))
 
+  ;; we're not playing alto. the reason is because alto is on a different
+  ;; time signature, and applying the same partition method to convert it
+  ;; to durations doesn't actually line them up. try it and you'll hear.
+
+  ;; (play (convert-to-new-style t-bass :C3))
+
+  ;; let's do a final manipulation
+  (first (convert-to-new-style t-melody :C4))
 
   )
