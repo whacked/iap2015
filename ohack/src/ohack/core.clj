@@ -748,5 +748,6 @@
   ;; now let's convert the old t-melody to a duration version
   )
 
-(map (fn [val]
-       ) (partition-by nil? t-melody))
+(map (fn [part]
+       (if (nil? (first part))
+         (count part))) (partition-by nil? t-melody))
