@@ -741,5 +741,9 @@
                                              :duration duration
                                              :instrument instrument])))))]
   ;; test that it works
-  (play (map #(gen-note % (inc (rand-int 4))) (range 60 68)))
+  ;; (play (map #(gen-note % (inc (rand-int 4))) (range 60 68)))
+
+  (stop)
+
+  ;; now let's convert the old t-melody to a duration version
   )
