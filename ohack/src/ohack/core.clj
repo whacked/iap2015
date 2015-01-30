@@ -747,3 +747,5 @@
 
   ;; now let's convert the old t-melody to a duration version
   )
+
+(partition-by nil? t-melody)
