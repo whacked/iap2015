@@ -769,6 +769,13 @@
   ;; (play (convert-to-new-style t-bass :C3))
 
   ;; let's do a final manipulation
-  (first (convert-to-new-style t-melody :C4))
+  (play
+   (let [num-play 128]
+     (map
+      (fn [p d]
+        {:pitch p :duration d})
+      (take num-play (make-markov-iterator (map :pitch (convert-to-new-style t-melody :C4))))
+      (take num-play (make-markov-iterator (map :duration (convert-to-new-style t-melody :C4)))))))
+
 
   )
