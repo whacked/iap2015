@@ -746,15 +746,16 @@
   (stop)
 
   ;; now let's convert the old t-melody to a duration version
-  (map
- (fn [[degree n-nil]]
-   (gen-note degree (inc n-nil)))
- (partition 2
-            (map (fn [part]
-                   (if (nil? (first part))
-                     (count part)
-                     (first part))) (partition-by nil?
-                                                  (degrees->pitches t-melody
-                                                                    :major :C4)))))
+  (play
+   (map
+    (fn [[degree n-nil]]
+      (gen-note degree (inc n-nil)))
+    (partition 2
+               (map (fn [part]
+                      (if (nil? (first part))
+                        (count part)
+                        (first part))) (partition-by nil?
+                      (degrees->pitches t-melody
+                                        :major :C4))))))
 
   )
